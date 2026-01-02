@@ -38,7 +38,9 @@ Now when you return next week, Claude knows your project.
 
 ### Not building code?
 
-For doc-heavy projects without complex architecture (knowledge bases, guides, process docs), use [Light Protocol](https://github.com/marekgorski/light-protocol) instead. It's a simplified 3-file version without role separation.
+For doc-heavy projects without complex architecture (knowledge bases, guides, process docs), use [uno-template](https://github.com/marekgorski/light-protocol) instead. It's the **uno** (Delegate) protocol — simplified for tasks where AI works FOR you without architect/builder role separation.
+
+> **Protocol Family:** This template is part of the [KayGee Protocol Family](https://github.com/marekgorski/admin/tree/main/protocol). **uno** = Delegate, **duo** = Collaborate (this template), **tre** = Automate.
 
 ## Compatibility
 
@@ -195,4 +197,4 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ---
 
-*Layer3 Protocol v1.3 — December 29, 2025*
+*duo/ab Protocol v2.0 — January 2, 2026*
