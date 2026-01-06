@@ -1,10 +1,10 @@
-# Layer3 Protocol
+# duo — Collaborate Protocol
 
-**Stop explaining your project every session.** Layer3 gives Claude persistent memory through structured documentation.
+**Stop explaining your project every session.** duo gives Claude persistent memory through structured documentation.
 
 ## The Problem
 
-Claude is powerful but forgetful. Every session starts from zero. You re-explain your project, your decisions, your constraints. Layer3 solves this.
+Claude is powerful but forgetful. Every session starts from zero. You re-explain your project, your decisions, your constraints. duo solves this.
 
 ## How It Works
 
@@ -38,7 +38,7 @@ Now when you return next week, Claude knows your project.
 
 ### Not building code?
 
-For doc-heavy projects without complex architecture (knowledge bases, guides, process docs), use [uno-template](https://github.com/marekgorski/light-protocol) instead. It's the **uno** (Delegate) protocol — simplified for tasks where AI works FOR you without architect/builder role separation.
+For doc-heavy projects without complex architecture (knowledge bases, guides, process docs), use [protocol-uno](https://github.com/marekgorski/protocol-uno) instead. It's the **uno** (Delegate) protocol — simplified for tasks where AI works FOR you without architect/builder role separation.
 
 > **Protocol Family:** This template is part of the [KayGee Protocol Family](https://github.com/marekgorski/admin/tree/main/protocol). **uno** = Delegate, **duo** = Collaborate (this template), **tre** = Automate.
 
@@ -54,7 +54,7 @@ For doc-heavy projects without complex architecture (knowledge bases, guides, pr
 
 ### 1. Create your repo from template
 
-1. Go to [github.com/marekgorski/layer3-protocol](https://github.com/marekgorski/layer3-protocol)
+1. Go to [github.com/marekgorski/protocol-duo](https://github.com/marekgorski/protocol-duo)
 2. Click **"Use this template"** → **"Create a new repository"**
 3. Name your repo, set visibility, click **"Create repository"**
 
