@@ -137,6 +137,25 @@ See `ROLE_PROTOCOL.md` for the full handoff protocol.
 
 ## Philosophy
 
+### Why Files Work
+
+AI forgets everything between conversations. Start a new chat, and it's meeting you for the first time.
+
+But files don't forget.
+
+When you write what you learned in a file, AI reads it next session. When you track what's done, AI knows where you left off. When you log what didn't work, AI doesn't suggest it again.
+
+**Your markdown files ARE the AI's memory.** That's the whole trick:
+
+| File | What It Remembers |
+|------|-------------------|
+| CLAUDE.md | What this project is and how it works |
+| DECISIONS.md | Why we chose this approach (so we don't re-debate) |
+| TODO.md | What needs doing next |
+| PROGRESS.md | What happened (so the next session knows) |
+
+Each file solves a specific forgetting problem. Together, they give AI persistent memory.
+
 ### Why separate Architect and Builder?
 
 - **Architect** has full context (PRFAQ, DECISIONS, etc.) for big-picture thinking
