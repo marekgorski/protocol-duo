@@ -80,7 +80,7 @@ Always commit and push after completing a unit of work. Don't let changes pile u
 
 ## System Protocol
 
-This project uses the **Layer3 workflow protocol** for AI-assisted development.
+This project uses the **duo workflow protocol** for AI-assisted development.
 
 ### Commands
 

@@ -71,10 +71,10 @@ Learned from KayGee:
 - "Tom in MySpace" metaphor makes the human tasks file memorable
 
 All repos now at v1.2:
-- Layer3 Protocol ✔️
+- duo Protocol ✔️
 - Gym ✔️
 - SpellMe (v3.2) ✔️
-- Light Protocol ✔️
+- uno Protocol ✔️
 - KayGee ✔️
 
 ---

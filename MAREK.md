@@ -71,7 +71,7 @@ Claude needs a decision before implementing.
 
 <!-- Example:
 - [ ] [M→C] Which repo to link for protocol template?
-  - Options: layer3-protocol, layer3-light, new public repo
+  - Options: protocol-duo, protocol-uno, new public repo
   - Context: ForEngineers CTA needs a destination
   - Unblocks: Claude adds link to ForEngineers.tsx
 -->
