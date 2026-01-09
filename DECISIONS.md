@@ -1,6 +1,6 @@
 # DECISIONS.md - Architecture Decision Records
 
-This file tracks architectural decisions for Layer3 Protocol.
+This file tracks architectural decisions for duo Protocol.
 
 ---
 
