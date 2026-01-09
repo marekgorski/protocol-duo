@@ -92,14 +92,14 @@ Use the workflow commands:
 ```
 my-project/
 ├── CLAUDE.md           # Technical reference + onboarding flow
-├── PRFAQ.md            # Product vision (Press Release / FAQ)
+├── PRFAQ.md            # Product vision (Press Release + FAQ)
 ├── CONSTRAINTS.md      # Principles, design system, rejected approaches
 ├── TODO.md             # Prioritized task list
 ├── PROGRESS.md         # Session-by-session development log
 ├── DECISIONS.md        # Architecture Decision Records
 ├── WORKFLOW.md         # Development process
 ├── ROLE_PROTOCOL.md    # AI workflow commands
-├── MAREK.md            # Human-only tasks (optional)
+├── MAREK.md            # Human-only tasks (optional - rename to your name)
 └── README.md           # This file (replace with your own)
 ```
 
@@ -216,4 +216,4 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ---
 
-*duo/ab Protocol v2.0 — January 2, 2026*
+*duo Protocol v1.3 — December 29, 2025*

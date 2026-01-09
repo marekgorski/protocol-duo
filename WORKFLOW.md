@@ -1,4 +1,4 @@
-# WORKFLOW.md - [PROJECT_NAME] Development Process
+# WORKFLOW.md - Development Process
 
 ## Session Commands Reference
 
@@ -93,12 +93,14 @@ Run `..hygiene` when files exceed these sizes:
 ```
 [PROJECT_NAME]/
 ├── CLAUDE.md           # Technical reference
-├── PRFAQ.md            # Product vision
+├── PRFAQ.md            # Product vision (Press Release + FAQ)
+├── CONSTRAINTS.md      # Principles, design system, rejected approaches
 ├── DECISIONS.md        # Architecture decisions
 ├── TODO.md             # Task list
 ├── PROGRESS.md         # Session log
 ├── WORKFLOW.md         # This file
 ├── ROLE_PROTOCOL.md    # AI commands
+├── MAREK.md            # Human-only tasks (optional)
 └── _archive/           # Old content
 ```
 

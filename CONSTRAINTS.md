@@ -62,4 +62,4 @@ Document canonical text for common actions to prevent synonyms:
 
 ---
 
-*Template from duo Protocol v1.1*
+*Template from duo Protocol v1.3*
