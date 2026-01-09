@@ -147,14 +147,14 @@ Document tool-specific quirks and workarounds here. This helps future contributo
 ```
 [PROJECT_NAME]/
 ├── CLAUDE.md           # Technical reference (this file)
-├── PRFAQ.md            # Product vision and FAQs
+├── PRFAQ.md            # Product vision (Press Release + FAQ)
 ├── TODO.md             # Prioritized task list
 ├── PROGRESS.md         # Session-by-session log
 ├── DECISIONS.md        # Architecture Decision Records
 ├── CONSTRAINTS.md      # Principles, rejected approaches
 ├── WORKFLOW.md         # Development process
 ├── ROLE_PROTOCOL.md    # AI workflow commands
-├── MAREK.md            # Human-only tasks (rename to your name)
+├── MAREK.md            # Human-only tasks (optional - rename to your name)
 └── README.md           # User-facing documentation
 ```
 
@@ -182,14 +182,14 @@ Document tool-specific quirks and workarounds here. This helps future contributo
 
 | File | Purpose |
 |------|---------|
-| `PRFAQ.md` | Product vision, press release, FAQs |
+| `PRFAQ.md` | Product vision (Press Release + FAQ) |
 | `DECISIONS.md` | Architecture Decision Records |
 | `CONSTRAINTS.md` | Principles, rejected approaches, design system |
 | `TODO.md` | Prioritized task list |
 | `PROGRESS.md` | Session-by-session development log |
 | `WORKFLOW.md` | Development process and commit strategy |
 | `ROLE_PROTOCOL.md` | AI workflow commands |
-| `MAREK.md` | Human-only tasks (rename to your name) |
+| `MAREK.md` | Human-only tasks (optional - rename to your name) |
 | `README.md` | User/setup documentation |
 
 ---

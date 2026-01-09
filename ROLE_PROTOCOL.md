@@ -534,14 +534,14 @@ Claude should:
 
 **Example response:**
 > "Based on where we are:
-> - Session files need rewriting (blocked on curriculum decision)
-> - Admin folder migration is ready to execute
-> - Helen's response is still pending
+> - Feature design needs rewriting (blocked on stakeholder decision)
+> - Database migration is ready to execute
+> - Client feedback is still pending
 >
 > Options:
-> 1. Execute the migration now (unblocks clean repo for workshop)
-> 2. Draft the gym starter spec (ready when Helen confirms)
-> 3. Park both and wait for Helen
+> 1. Execute the migration now (unblocks clean schema for next feature)
+> 2. Draft the API spec (ready when stakeholder confirms requirements)
+> 3. Park both and wait for client feedback
 >
 > Which feels right?"
 

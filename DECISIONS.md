@@ -8,11 +8,11 @@ This file tracks architectural decisions for duo Protocol.
 
 ### ADR-001: Verification Steps Required in Protocol
 
-**Status:** Accepted  
+**Status:** Accepted
 **Date:** 2025-12-28
 
-**Context:**  
-In gym project, Builder marked TODO items as complete without verifying they actually worked. Width "fix" was claimed done but didn't fix the bug. TODO showed phases complete that weren't actually done. Design system (button colors, text conventions) wasn't documented, causing Builder to improvise inconsistently.
+**Context:**
+In early protocol testing, Builder marked TODO items as complete without verifying they actually worked. Claimed fixes didn't actually fix bugs. TODO showed items complete that weren't actually done. Design systems (button colors, text conventions) weren't documented, causing Builder to improvise inconsistently across implementations.
 
 **Decision:**  
 Protocol v1.1 adds mandatory verification:
@@ -37,11 +37,11 @@ Protocol v1.1 adds mandatory verification:
 
 ### ADR-002: CONSTRAINTS.md as Required File
 
-**Status:** Accepted  
+**Status:** Accepted
 **Date:** 2025-12-28
 
-**Context:**  
-Builder improvised button colors and text because no design system was documented. This led to inconsistent UI ("New Session" vs "Next Session" vs "Next Gym Session"). Fixing these required rework.
+**Context:**
+Builder improvised button colors and text because no design system was documented. This led to inconsistent UI with multiple variations of the same action (synonyms for navigation, varying button styles). Fixing these inconsistencies required rework.
 
 **Decision:**  
 Add CONSTRAINTS.md as a required protocol file containing:
