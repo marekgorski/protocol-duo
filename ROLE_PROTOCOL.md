@@ -1,4 +1,4 @@
-# Layer3 AI Workflow Protocol (v1.3)
+# duo AI Workflow Protocol (v1.3)
 
 ## Changelog
 - **v1.3** (Dec 29, 2025): Added multi-tool handoffs, conversational guidance, GitHub Template setup
