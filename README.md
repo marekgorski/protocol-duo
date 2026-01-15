@@ -93,6 +93,7 @@ Use the workflow commands:
 my-project/
 ├── CLAUDE.md           # Technical reference + onboarding flow
 ├── PRFAQ.md            # Product vision (Press Release + FAQ)
+├── PRINCIPLES.md       # Distilled wisdom from ADRs (<2 min read)
 ├── CONSTRAINTS.md      # Principles, design system, rejected approaches
 ├── TODO.md             # Prioritized task list
 ├── PROGRESS.md         # Session-by-session development log
@@ -216,4 +217,4 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ---
 
-*duo Protocol v1.3 — December 29, 2025*
+*duo Protocol v1.4 — January 15, 2026*
