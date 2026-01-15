@@ -1,6 +1,7 @@
-# duo AI Workflow Protocol (v1.3)
+# duo AI Workflow Protocol (v1.4)
 
 ## Changelog
+- **v1.4** (Jan 15, 2026): Added PRINCIPLES.md file, enhanced `..hygiene` with token budget monitoring, added post-v1.0 hygiene guidance (from gym app learnings)
 - **v1.3** (Dec 29, 2025): Added multi-tool handoffs, conversational guidance, GitHub Template setup
 - **v1.2** (Dec 28, 2025): Added task ownership markers, human/AI handoff system, token budget awareness, context drift check, recovery levels
 - **v1.1** (Dec 28, 2025): Added verification steps, acceptance criteria requirements, `..recover` command
@@ -313,25 +314,64 @@ Marek: Review draft and send when ready.
 
 **Context Garbage Collection (Architect Only)**
 
-**Step 1: Scan File Sizes**
+**Step 1: Token Budget Check**
+Run word count to assess documentation load:
+```bash
+wc -w *.md
+```
+
+Evaluate health:
+- ✅ **Good:** Total <10,000 words, no single file >3,000 words
+- ⚠️ **Warning:** Total 10,000-15,000 words, or any file >3,000 words
+- 🚨 **Critical:** Total >15,000 words, or any file >5,000 words
+
+**Step 2: Scan File Sizes**
 Flag files exceeding thresholds:
-- `DECISIONS.md`: > 50KB
-- `PROGRESS.md`: > 30KB
+- `DECISIONS.md`: > 50KB or > 10 ADRs
+- `PROGRESS.md`: > 30KB or > 10 sessions
 - `TODO.md`: > 100 items
 - `MAREK.md`: > 50 items
+- Any `.md` file: > 3,000 words
 
-**Step 2: Archive**
+**Step 3: Apply "Next Session Test"**
+For each flagged file, review sections:
+- **Keep:** Would Claude need this next session?
+  - Active decisions, current architecture, technical reference
+- **Archive:** Historical narrative, debugging stories, "how we learned X"
+
+**Step 4: Archive**
 - PROGRESS.md entries > 30 days → `_archive/PROGRESS_[YYYY-MM].md`
 - Completed TODO items → `_archive/TODO_DONE_[YYYY-MM].md`
 - Completed MAREK.md items → `_archive/MAREK_DONE_[YYYY-MM].md`
 - Superseded ADRs → `_archive/DECISIONS_ARCHIVE.md`
+- Historical content from CLAUDE.md → `_archive/DEBUGGING_NOTES.md` or similar
 
-**Step 3: Report**
+**Step 5: Extract Principles (if applicable)**
+If DECISIONS.md has >5 implemented ADRs and no PRINCIPLES.md exists:
+- Create PRINCIPLES.md from recurring patterns
+- Extract mission from PRFAQ.md
+- Distill product, technical, and design principles
+- Move stable ADRs to archive (keep 2-3 active)
+
+**Step 6: Report**
 ```
 "🗑️ Archived [X] KB. Active context now [Y] KB.
 
-Health: [Good/Warning/Critical]"
+Health: [Good ✅ / Warning ⚠️ / Critical 🚨]
+
+- Total words: [N]
+- Files flagged: [list]
+- ADRs active: [N]
+- Sessions in PROGRESS.md: [N]
+
+[Optional: Suggest next hygiene date]"
 ```
+
+**When to Run:**
+- **Proactive:** Monthly check (first Monday)
+- **Reactive:** After v0.5, v1.0, v2.0 milestones
+- **Emergency:** When Architect feels sluggish loading context
+- **Critical:** When token budget check shows 🚨 Critical
 
 ---
 
@@ -622,4 +662,4 @@ When Claude sees a potential issue, it should:
 
 ---
 
-*v1.3 — December 29, 2025*
+*v1.4 — January 15, 2026*

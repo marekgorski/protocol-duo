@@ -58,6 +58,90 @@ Before any major refactor or risky change:
 
 ---
 
+## Token Budget Management
+
+### Why It Matters
+
+AI forgets everything between conversations, so files are its memory. But if those files grow too large, you burn token budget before any work starts.
+
+**The v1.0 Wall:**
+After shipping 14+ features, documentation can balloon from 5,000 words to 15,000+ words. Without maintenance, Architect mode burns 25%+ of session budget just loading context.
+
+**Target Budget:**
+- **Architect Mode:** ~15% token budget (7,500 tokens, ~10,000 words)
+- **Builder Mode:** ~5% token budget (2,500 tokens, ~3,500 words)
+
+### Monitoring
+
+**Check monthly** or after major milestones (v0.5, v1.0):
+
+```bash
+wc -w *.md
+```
+
+**Health Levels:**
+- ✅ **Good:** Total <10,000 words, no single file >3,000 words
+- ⚠️ **Warning:** Total 10,000-15,000 words, or any file >3,000 words
+- 🚨 **Critical:** Total >15,000 words, or any file >5,000 words
+
+### The "Next Session Test"
+
+For every section in a context file, ask:
+> "Would Claude need this to start fresh next session?"
+
+**Keep (Active Reference):**
+- Current architecture and tech stack
+- Active decisions (last 2-3 ADRs)
+- Technical patterns Claude will use
+- Design system rules
+- Next 5-10 tasks
+
+**Archive (Historical Narrative):**
+- "How we discovered X" stories
+- Debugging session notes from 2+ weeks ago
+- Superseded ADRs (decisions that are now stable)
+- Completed tasks from >30 days ago
+- Evolution explanations ("variant cycling went through 3 iterations...")
+
+### When Cleanup Becomes Mandatory
+
+**Immediate Blockers** (run `..hygiene` NOW):
+1. Token budget shows 🚨 Critical (>15,000 words)
+2. Any single .md file exceeds 5,000 words
+3. Claude asks "which version?" about a decision (context confusion)
+4. Architect spends >2 messages "catching up" on project state
+
+**Warning Signs** (plan cleanup soon):
+1. More than 10 implemented ADRs in DECISIONS.md
+2. More than 10 sessions in PROGRESS.md
+3. Same concept explained in 3+ files
+4. CLAUDE.md reads like a story, not reference
+
+**Healthy Maintenance** (proactive, not reactive):
+- Monthly hygiene check (first Monday)
+- After v0.5, v1.0, v2.0 milestones
+- When extracting PRINCIPLES.md from patterns
+
+### Post-v1.0 Hygiene Checklist
+
+Run after major milestones (v0.5, v1.0, v2.0) or when hitting ⚠️ Warning level:
+
+- [ ] Run token budget check: `wc -w *.md`
+- [ ] Create/update PRINCIPLES.md from ADR patterns
+- [ ] Archive stable ADRs (keep 2-3 active in DECISIONS.md)
+- [ ] Archive PROGRESS sessions >30 days to `_archive/PROGRESS_[YYYY-MM].md`
+- [ ] Slim CLAUDE.md (remove history, keep reference)
+- [ ] Apply "Next Session Test" to all flagged files
+- [ ] Update cross-references (link to archives)
+- [ ] Commit and push: `git add -A && git commit -m "docs: v[X] hygiene pass" && git push`
+
+**Frequency:**
+- After v1.0 shipping (always)
+- Monthly if actively developing
+- When token budget exceeds 20%
+
+---
+
 ## Session Handoff Protocol
 
 ### Starting a Session
@@ -94,6 +178,7 @@ Run `..hygiene` when files exceed these sizes:
 [PROJECT_NAME]/
 ├── CLAUDE.md           # Technical reference
 ├── PRFAQ.md            # Product vision (Press Release + FAQ)
+├── PRINCIPLES.md       # Distilled wisdom from ADRs (<2 min read)
 ├── CONSTRAINTS.md      # Principles, design system, rejected approaches
 ├── DECISIONS.md        # Architecture decisions
 ├── TODO.md             # Task list

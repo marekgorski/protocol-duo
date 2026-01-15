@@ -40,6 +40,7 @@ Does this capture it? Anything I'm missing or got wrong?"
 
 Once user confirms, update these files with real content:
 - `PRFAQ.md` — Write press release and FAQs
+- `PRINCIPLES.md` — Extract initial principles from discovery answers (mission, 2-3 product principles)
 - `DECISIONS.md` — Document initial architecture choices
 - `TODO.md` — Create prioritized task list
 - `CLAUDE.md` — Replace this section with project-specific technical reference
@@ -148,6 +149,7 @@ Document tool-specific quirks and workarounds here. This helps future contributo
 [PROJECT_NAME]/
 ├── CLAUDE.md           # Technical reference (this file)
 ├── PRFAQ.md            # Product vision (Press Release + FAQ)
+├── PRINCIPLES.md       # Distilled wisdom from ADRs (<2 min read)
 ├── TODO.md             # Prioritized task list
 ├── PROGRESS.md         # Session-by-session log
 ├── DECISIONS.md        # Architecture Decision Records
@@ -183,6 +185,7 @@ Document tool-specific quirks and workarounds here. This helps future contributo
 | File | Purpose |
 |------|---------|
 | `PRFAQ.md` | Product vision (Press Release + FAQ) |
+| `PRINCIPLES.md` | Distilled wisdom from ADRs (<2 min read) |
 | `DECISIONS.md` | Architecture Decision Records |
 | `CONSTRAINTS.md` | Principles, rejected approaches, design system |
 | `TODO.md` | Prioritized task list |
