@@ -55,6 +55,50 @@ Document canonical text for common actions to prevent synonyms:
 
 ---
 
+## AI Boundaries (Optional)
+
+Define acceptable vs rejected AI use cases to prevent feature creep. Remove this section if not applicable to your project.
+
+### Acceptable AI Use Cases ✅
+
+AI applications that **amplify your core value** without corrupting it:
+
+1. **[Use Case 1]**
+   - What: [Description]
+   - Why acceptable: [Rationale]
+
+2. **[Use Case 2]**
+   - What: [Description]
+   - Why acceptable: [Rationale]
+
+<!-- Example from SpellMe:
+1. **Error-pattern clustering across learners**
+   - What: Identify common confusion patterns
+   - Why acceptable: Helps coaches see patterns, doesn't replace judgment
+-->
+
+### Explicitly Rejected AI ❌
+
+AI applications that would **corrupt your core value proposition**:
+
+1. **[Rejected Use Case 1]**
+   - What: [Description]
+   - Why rejected: [How it undermines core value]
+
+2. **[Rejected Use Case 2]**
+   - What: [Description]
+   - Why rejected: [How it undermines core value]
+
+<!-- Example from SpellMe:
+1. **LLM chat tutors**
+   - What: Built-in AI tutor for explanations
+   - Why rejected: Pedagogically dubious, expensive, optimizes for conversation not mastery
+-->
+
+**Principle:** Define the line clearly. If an AI feature optimizes for engagement over your core metric, reject it.
+
+---
+
 ## Open Questions
 
 1. Document unresolved design questions here
@@ -62,4 +106,4 @@ Document canonical text for common actions to prevent synonyms:
 
 ---
 
-*Template from duo Protocol v1.3*
+*Template from duo Protocol v1*

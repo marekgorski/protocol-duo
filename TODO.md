@@ -29,6 +29,29 @@ Example format:
 
 ## 🟡 Ready to Build
 
+- [ ] **Review feedback_from_spellme.md and decide template integrations**
+  - AC: Review PRINCIPLES.md learnings section
+  - AC: Decide: Add "Operational Patterns" section to PRINCIPLES.md template?
+  - AC: Review TODO.md evolution section
+  - AC: Decide: Add "In Progress", "Known Issues", "Technical Debt" sections to TODO.md template?
+  - AC: Decide: Add "Strategic Context" as optional section?
+  - AC: Document decisions in DECISIONS.md
+  - AC: Archive feedback_from_spellme.md after processing
+  - Context: SpellMe alignment pass (Jan 17, 2026) identified patterns worth considering
+
+- [ ] **Continue SpellMe downstream sync**
+  - AC: After processing feedback, sync protocol improvements back to SpellMe
+  - AC: Update SpellMe's ROLE_PROTOCOL.md with any missing v1 features
+  - AC: Update SpellMe's WORKFLOW.md with token budget management section
+  - AC: Verify SpellMe has enhanced `..hygiene` command
+  - Blocks: feedback_from_spellme.md review must complete first
+
+- [ ] **Align remaining repos to v1**
+  - AC: Identify all repos using protocol-duo
+  - AC: Run alignment pass on each (gym already done, spellme in progress)
+  - AC: Capture innovations from each in feedback files
+  - AC: All repos on v1 before public launch
+
 ## 🔵 Backlog
 
 ## Open Questions

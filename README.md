@@ -217,4 +217,4 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ---
 
-*duo Protocol v1.4 — January 15, 2026*
+*duo Protocol v1*

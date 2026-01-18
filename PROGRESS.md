@@ -4,6 +4,32 @@
 
 ---
 
+## 2026-01-17 — SpellMe Alignment Pass (Upstream Feedback)
+
+**Context:** Second repo alignment pass (after Gym). SpellMe had evolved innovations worth upstreaming to protocol.
+
+Done:
+- Reset protocol version to v1 (frozen until multi-repo alignment complete)
+- Added "Compressed ADRs" section to DECISIONS.md with table format and archiving instructions
+- Added "AI Boundaries" optional section to CONSTRAINTS.md template
+- Created `feedback_from_spellme.md` with:
+  - PRINCIPLES.md learnings (operational patterns evolved beyond template)
+  - TODO.md evolution (strategic context, phase-based organization, specialized sections)
+
+Upstream from SpellMe:
+- Compressed ADR table format with links to `_archive/ADR_FULL/`
+- AI Boundaries section (Acceptable vs Rejected AI use cases)
+
+Deferred (SpellMe to continue evolving):
+- CONTEXT_PROMPT.md (needs independent review)
+- Phase-based TODO organization (unproven, let it evolve)
+
+Next:
+- Review `feedback_from_spellme.md` to decide what to integrate into templates
+- Continue SpellMe downstream sync after protocol processes feedback
+
+---
+
 ## 2026-01-15 — Protocol Enhancement from Gym App Feedback
 
 **Context:** Gym app team provided comprehensive feedback after successfully shipping v1.0. They hit a "token ceiling" at 13,500 tokens (27% budget) and discovered the protocol lacked post-v1.0 maintenance guidance. This session implements their learnings into the protocol-duo template.
@@ -45,7 +71,7 @@ Decided:
   - Target budgets: 15% Architect, 5% Builder
 
 Next:
-- Protocol template is now v1.4
+- Protocol template frozen at v1 until multi-repo alignment complete
 - Ready for teams to use enhanced hygiene guidance
 - Gym app learnings will inform workshop curriculum (Session 5)
 

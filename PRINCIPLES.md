@@ -124,4 +124,4 @@ wc -w *.md
 
 *This file is extracted from active ADRs after patterns emerge. It replaces the need to read all historical decisions.*
 
-*Template from duo Protocol v1.4*
+*Template from duo Protocol v1*

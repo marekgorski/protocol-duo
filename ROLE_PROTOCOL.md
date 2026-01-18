@@ -1,11 +1,4 @@
-# duo AI Workflow Protocol (v1.4)
-
-## Changelog
-- **v1.4** (Jan 15, 2026): Added PRINCIPLES.md file, enhanced `..hygiene` with token budget monitoring, added post-v1.0 hygiene guidance (from gym app learnings)
-- **v1.3** (Dec 29, 2025): Added multi-tool handoffs, conversational guidance, GitHub Template setup
-- **v1.2** (Dec 28, 2025): Added task ownership markers, human/AI handoff system, token budget awareness, context drift check, recovery levels
-- **v1.1** (Dec 28, 2025): Added verification steps, acceptance criteria requirements, `..recover` command
-- **v1.0** (Dec 2024): Initial protocol
+# duo AI Workflow Protocol (v1)
 
 ## Workflow Summary
 
@@ -662,4 +655,4 @@ When Claude sees a potential issue, it should:
 
 ---
 
-*v1.4 — January 15, 2026*
+*duo Protocol v1*

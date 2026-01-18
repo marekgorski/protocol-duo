@@ -4,6 +4,23 @@ This file tracks architectural decisions for duo Protocol.
 
 ---
 
+## Compressed ADRs
+
+When `..hygiene` runs, stable ADRs are compressed to a table format with full text archived:
+
+| ADR | Title | Status | Summary |
+|-----|-------|--------|---------|
+| ADR-001 | [Title] | Accepted | [1-line summary]. See `_archive/ADR_FULL/ADR-001.md` |
+
+**Benefits:**
+- Reduces token budget (full text only loaded when needed)
+- Table provides at-a-glance status
+- Archive preserves full rationale for reference
+
+**When to compress:** After ADR is stable (implemented, no recent changes, >30 days old)
+
+---
+
 ## Active Decisions
 
 ### ADR-001: Verification Steps Required in Protocol
@@ -141,13 +158,13 @@ Copy this when adding decisions:
 ```markdown
 ### ADR-XXX: [DECISION_TITLE]
 
-**Status:** Proposed | Accepted | Deprecated | Superseded  
+**Status:** Proposed | Accepted | Deprecated | Superseded
 **Date:** [DATE]
 
-**Context:**  
+**Context:**
 [What situation prompted this decision?]
 
-**Decision:**  
+**Decision:**
 [What did we decide?]
 
 **Alternatives Considered:**
@@ -157,6 +174,17 @@ Copy this when adding decisions:
 - ✅ [Positive]
 - ⚠️ [Tradeoff]
 ```
+
+### Compressing an ADR
+
+When an ADR is stable (>30 days, implemented, no changes):
+
+1. Copy full ADR to `_archive/ADR_FULL/ADR-XXX.md`
+2. Replace full text with table row:
+   ```markdown
+   | ADR-XXX | [Title] | Accepted | [1-line]. See `_archive/ADR_FULL/ADR-XXX.md` |
+   ```
+3. Move row to "Compressed ADRs" table above
 
 ---
 
