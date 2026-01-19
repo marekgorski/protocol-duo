@@ -164,13 +164,57 @@ SpellMe's TODO.md evolved beyond simple priority buckets to include strategic co
 
 ---
 
-## Next Steps for Protocol
+## Protocol Review Complete (2026-01-19)
 
-1. Review this feedback
-2. Decide which patterns to integrate into templates
-3. If integrating, determine format (optional vs required, placeholder vs example)
-4. Update protocol version after integration
+**Reviewed by:** Architect session
+**Decision:** ADR-004 in DECISIONS.md
+
+### Integrated into Template ✅
+
+| Pattern | Location |
+|---------|----------|
+| In Progress section | TODO.md `## 🟠 In Progress` |
+| Known Issues section | TODO.md `## ⚠️ Known Issues` |
+| Technical Debt section | TODO.md `## 🔧 Technical Debt` |
+
+### Rejected (with rationale)
+
+| Pattern | Reason |
+|---------|--------|
+| Operational Patterns in PRINCIPLES.md | PRINCIPLES.md is for ADR distillation, not code standards |
+| Strategic Context in TODO.md | Duplicates PRFAQ.md's purpose |
+| Phase-based TODO organization | Time estimates contradict protocol; not working well in SpellMe |
+| Decisions Pending ADR | Already covered by Open Questions |
 
 ---
 
-*This file can be archived to `_archive/` after protocol has processed the feedback.*
+## SpellMe Downstream Sync Instructions
+
+When syncing SpellMe to protocol v1:
+
+### 1. Fix PRINCIPLES.md Usage
+- **Current state:** Contains operational patterns (Zero TS Errors, Test Migrations, etc.)
+- **Correct usage:** Distilled wisdom from ADRs only
+- **Action:** Move operational patterns to new PATTERNS.md or CLAUDE.md "Code Standards" section
+
+### 2. Move Strategic Context to PRFAQ.md
+- **Current state:** Strategic Context section in TODO.md
+- **Correct location:** PRFAQ.md "Appendix: The Problem We're Solving"
+- **Action:** Move content, update PRFAQ.md, remove from TODO.md
+
+### 3. Remove Phase-Based Organization
+- **Current state:** Phase A, Phase B with time estimates
+- **Issue:** Not working well, time estimates contradict protocol
+- **Action:** Flatten to standard priority sections (Blocking, In Progress, Ready, Backlog)
+
+### 4. Adopt Standard TODO.md Sections
+- **Add:** 🟠 In Progress, ⚠️ Known Issues, 🔧 Technical Debt
+- **Use:** Open Questions (not "Decisions Pending ADR")
+
+### 5. Align CONSTRAINTS.md
+- **Ensure:** Open Questions section present
+- **Check:** AI Boundaries section (already present from earlier sync)
+
+---
+
+*This file has been processed. Archive to `_archive/` when SpellMe sync is complete.*

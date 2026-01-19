@@ -27,24 +27,22 @@ Example format:
   - Unblocks: [what Claude will do after]
 ```
 
+## 🟠 In Progress
+
+> Active work. Limit to 1-2 items. Complete before starting new work.
+
+(Currently empty)
+
 ## 🟡 Ready to Build
 
-- [ ] **Review feedback_from_spellme.md and decide template integrations**
-  - AC: Review PRINCIPLES.md learnings section
-  - AC: Decide: Add "Operational Patterns" section to PRINCIPLES.md template?
-  - AC: Review TODO.md evolution section
-  - AC: Decide: Add "In Progress", "Known Issues", "Technical Debt" sections to TODO.md template?
-  - AC: Decide: Add "Strategic Context" as optional section?
-  - AC: Document decisions in DECISIONS.md
-  - AC: Archive feedback_from_spellme.md after processing
-  - Context: SpellMe alignment pass (Jan 17, 2026) identified patterns worth considering
-
-- [ ] **Continue SpellMe downstream sync**
-  - AC: After processing feedback, sync protocol improvements back to SpellMe
-  - AC: Update SpellMe's ROLE_PROTOCOL.md with any missing v1 features
-  - AC: Update SpellMe's WORKFLOW.md with token budget management section
-  - AC: Verify SpellMe has enhanced `..hygiene` command
-  - Blocks: feedback_from_spellme.md review must complete first
+- [ ] **Sync SpellMe to protocol v1**
+  - AC: Fix PRINCIPLES.md usage (move operational patterns to PATTERNS.md or CLAUDE.md)
+  - AC: Move strategic context from TODO.md to PRFAQ.md
+  - AC: Remove phase-based organization from TODO.md
+  - AC: Add In Progress, Known Issues, Technical Debt sections
+  - AC: Verify Open Questions section in place (not "Decisions Pending ADR")
+  - AC: Archive `feedback_from_spellme.md` after sync complete
+  - Context: Detailed instructions in `feedback_from_spellme.md` "SpellMe Downstream Sync Instructions"
 
 - [ ] **Align remaining repos to v1**
   - AC: Identify all repos using protocol-duo
@@ -53,6 +51,28 @@ Example format:
   - AC: All repos on v1 before public launch
 
 ## 🔵 Backlog
+
+## ⚠️ Known Issues
+
+> Documented fragility. Bugs and regressions tracked separately from features.
+
+Example format:
+```
+- [ ] **Issue description**
+  - AC: What "fixed" looks like
+  - Context: How it manifests, any workarounds
+```
+
+## 🔧 Technical Debt
+
+> Code quality improvements. Important but not urgent.
+
+Example format:
+```
+- [ ] **Debt item**
+  - AC: Specific improvement criteria
+  - Impact: What this enables or prevents
+```
 
 ## Open Questions
 

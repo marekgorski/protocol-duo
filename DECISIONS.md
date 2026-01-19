@@ -151,6 +151,57 @@ Add post-v1.0 maintenance to protocol template:
 
 ---
 
+### ADR-004: TODO.md Template Enhancement — In Progress, Known Issues, Technical Debt
+
+**Status:** Accepted
+**Date:** 2026-01-19
+
+**Context:**
+SpellMe alignment pass (Jan 17, 2026) revealed innovations in TODO.md structure that evolved beyond the template. After assessment, three patterns proved genuinely valuable while others were rejected for duplicating existing mechanisms or adding premature structure.
+
+**Decision:**
+Add three new sections to TODO.md template:
+
+1. **🟠 In Progress** — Active work tracking
+   - Prevents starting new work while something is half-done
+   - Solves "what was I working on?" across sessions
+   - Limit to 1-2 items
+
+2. **⚠️ Known Issues** — Documented fragility
+   - Separates bugs from features
+   - Maintains awareness of known fragility without blocking feature work
+   - Includes AC + context format
+
+3. **🔧 Technical Debt** — Code quality improvements
+   - Prevents debt from getting lost in feature backlog
+   - Keeps it visible without blocking feature prioritization
+   - Includes AC + impact format
+
+**Rejected Patterns:**
+
+| Pattern | Why Rejected |
+|---------|--------------|
+| Operational Patterns in PRINCIPLES.md | PRINCIPLES.md is for ADR distillation, not code standards. Projects needing this can spawn PATTERNS.md |
+| Strategic Context in TODO.md | Duplicates PRFAQ.md's purpose |
+| Phase-based organization | Time estimates contradict protocol guidance; premature structure |
+| Decisions Pending ADR | Already covered by Open Questions in TODO.md and CONSTRAINTS.md |
+
+**Consequences:**
+- ✅ TODO.md becomes more complete task management tool
+- ✅ Bugs, debt, and features have separate tracking
+- ✅ "In Progress" provides session continuity
+- ✅ Template stays lean (example format, not mandatory content)
+- ⚠️ Slightly more sections to understand
+- ⚠️ SpellMe needs alignment to use corrected patterns
+
+**SpellMe Sync Required:**
+- Fix PRINCIPLES.md usage (ADR distillation, not operational patterns)
+- Move strategic context to PRFAQ.md
+- Remove phase-based organization (not working well)
+- Adopt standard TODO.md sections
+
+---
+
 ## Template: New ADR
 
 Copy this when adding decisions:

@@ -4,6 +4,28 @@
 
 ---
 
+## 2026-01-19 — SpellMe Feedback Assessment & Template Enhancement
+
+**Context:** Architect review of `feedback_from_spellme.md` to decide which patterns to integrate into protocol template.
+
+Done:
+- Assessed all 7 proposed patterns against protocol philosophy
+- Added `## 🟠 In Progress` section to TODO.md template
+- Added `## ⚠️ Known Issues` section to TODO.md template (documented fragility approach)
+- Added `## 🔧 Technical Debt` section to TODO.md template
+- Created ADR-004 documenting decision with rejected patterns and rationale
+- Updated `feedback_from_spellme.md` with SpellMe sync instructions
+
+Decided:
+- ADR-004: Integrate In Progress, Known Issues, Technical Debt into template
+- Rejected: Operational Patterns in PRINCIPLES.md (wrong file), Strategic Context (use PRFAQ), Phase-based org (time estimates), Decisions Pending ADR (use Open Questions)
+
+Next:
+- Sync SpellMe to corrected patterns (fix PRINCIPLES.md usage, remove phases, adopt standard sections)
+- Archive `feedback_from_spellme.md` after SpellMe sync complete
+
+---
+
 ## 2026-01-17 — SpellMe Alignment Pass (Upstream Feedback)
 
 **Context:** Second repo alignment pass (after Gym). SpellMe had evolved innovations worth upstreaming to protocol.
