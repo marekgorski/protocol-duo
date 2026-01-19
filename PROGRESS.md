@@ -4,9 +4,11 @@
 
 ---
 
-## 2026-01-19 — SpellMe Feedback Assessment, Template Enhancement & Sync
+## 2026-01-19 — Full Protocol v1 Alignment Pass
 
-**Context:** Architect review of `feedback_from_spellme.md` to decide which patterns to integrate into protocol template, then sync SpellMe to corrected patterns.
+**Context:** Architect review of learnings from all duo repos, template enhancement, and alignment of all repos to v1.
+
+### Phase 1: SpellMe Feedback Assessment
 
 Done:
 - Assessed all 7 proposed patterns against protocol philosophy
@@ -14,24 +16,47 @@ Done:
 - Added `## ⚠️ Known Issues` section to TODO.md template (documented fragility approach)
 - Added `## 🔧 Technical Debt` section to TODO.md template
 - Created ADR-004 documenting decision with rejected patterns and rationale
-- Synced SpellMe to protocol v1:
-  - Rewrote PRINCIPLES.md as distilled ADR wisdom
-  - Created PATTERNS.md for operational patterns (moved from PRINCIPLES.md)
-  - Moved strategic context from TODO.md to PRFAQ.md appendix
-  - Flattened phase-based TODO organization (removed PHASE A/B/C/D)
-  - Renamed "Decisions Pending ADR" to "Open Questions"
-- Archived `feedback_from_spellme.md` to `_archive/`
+- Synced SpellMe to protocol v1
+
+### Phase 2: Remaining Repos Assessment
+
+Ingested learnings from device-care, kaygee, quests:
+
+| Innovation | Source | Decision |
+|------------|--------|----------|
+| Protocol Evolution Philosophy | device-care | **Added to template** |
+| Structured Onboarding Flow | kaygee | Skip (too project-specific) |
+| Environment Notes | device-care, kaygee | Already in template |
+
+### Phase 3: Alignment
+
+| Repo | Changes | Commit |
+|------|---------|--------|
+| protocol-duo | Added Protocol Evolution Philosophy to CLAUDE.md | 3b712c3 |
+| device-care | Added PRINCIPLES.md, TODO sections, v1 markers | f592a0f |
+| kaygee | Added Known Issues/Tech Debt sections, v1 markers | 17e32ae |
+| quests | Added PRINCIPLES.md, restructured TODO.md, v1 markers | 87868f3 |
+| spellme | PRINCIPLES.md, PATTERNS.md, TODO restructure (earlier) | 52d1fed |
+
+### All Duo Repos Now on v1
+
+| Repo | Status |
+|------|--------|
+| gym | v1 (previous session) |
+| spellme | v1 |
+| device-care | v1 |
+| kaygee | v1 |
+| quests | v1 |
 
 Decided:
 - ADR-004: Integrate In Progress, Known Issues, Technical Debt into template
+- Added Protocol Evolution Philosophy to CLAUDE.md template (from device-care)
 - Rejected: Operational Patterns in PRINCIPLES.md (wrong file), Strategic Context (use PRFAQ), Phase-based org (time estimates), Decisions Pending ADR (use Open Questions)
 
-Commits:
-- protocol-duo: c5f7347 (template enhancements)
-- spellme: 52d1fed (protocol alignment)
-
 Next:
-- Align remaining repos to v1 (gym done, spellme done)
+- Protocol v1 alignment complete
+- All 5 duo repos aligned
+- Ready for public launch when desired
 
 ---
 

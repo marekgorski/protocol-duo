@@ -35,13 +35,12 @@ Example format:
 
 ## 🟡 Ready to Build
 
-- [ ] **Align remaining repos to v1**
-  - AC: Identify all repos using protocol-duo
-  - AC: Run alignment pass on each (gym done, spellme done)
-  - AC: Capture innovations from each in feedback files
-  - AC: All repos on v1 before public launch
+(No tasks currently ready)
 
 ## 🔵 Backlog
+
+- [x] **Align all repos to v1** ✅ Completed Jan 19, 2026
+  - gym, spellme, device-care, kaygee, quests all on v1
 
 ## ⚠️ Known Issues
 
