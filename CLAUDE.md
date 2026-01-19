@@ -83,6 +83,19 @@ Always commit and push after completing a unit of work. Don't let changes pile u
 
 This project uses the **duo workflow protocol** for AI-assisted development.
 
+### Protocol Evolution Philosophy
+
+This instance of protocol-duo may **intentionally drift** from the master template based on project-specific needs. This drift is a feature, not a bug.
+
+**The Reintegration Cycle:**
+1. **Clone** — Start from protocol-duo template
+2. **Initialize** — Customize for project needs (one-way door)
+3. **Drift** — Evolve based on real-world usage
+4. **Reintegrate** — Contribute learnings back to master protocol
+5. **Redistribute** — Improved protocol benefits all future clones
+
+Each repo's learnings strengthen the collective. When you discover patterns that work well, document them and consider contributing back to `protocol-duo`.
+
 ### Commands
 
 | Command | Mode | Purpose |
