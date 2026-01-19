@@ -4,9 +4,9 @@
 
 ---
 
-## 2026-01-19 — SpellMe Feedback Assessment & Template Enhancement
+## 2026-01-19 — SpellMe Feedback Assessment, Template Enhancement & Sync
 
-**Context:** Architect review of `feedback_from_spellme.md` to decide which patterns to integrate into protocol template.
+**Context:** Architect review of `feedback_from_spellme.md` to decide which patterns to integrate into protocol template, then sync SpellMe to corrected patterns.
 
 Done:
 - Assessed all 7 proposed patterns against protocol philosophy
@@ -14,15 +14,24 @@ Done:
 - Added `## ⚠️ Known Issues` section to TODO.md template (documented fragility approach)
 - Added `## 🔧 Technical Debt` section to TODO.md template
 - Created ADR-004 documenting decision with rejected patterns and rationale
-- Updated `feedback_from_spellme.md` with SpellMe sync instructions
+- Synced SpellMe to protocol v1:
+  - Rewrote PRINCIPLES.md as distilled ADR wisdom
+  - Created PATTERNS.md for operational patterns (moved from PRINCIPLES.md)
+  - Moved strategic context from TODO.md to PRFAQ.md appendix
+  - Flattened phase-based TODO organization (removed PHASE A/B/C/D)
+  - Renamed "Decisions Pending ADR" to "Open Questions"
+- Archived `feedback_from_spellme.md` to `_archive/`
 
 Decided:
 - ADR-004: Integrate In Progress, Known Issues, Technical Debt into template
 - Rejected: Operational Patterns in PRINCIPLES.md (wrong file), Strategic Context (use PRFAQ), Phase-based org (time estimates), Decisions Pending ADR (use Open Questions)
 
+Commits:
+- protocol-duo: c5f7347 (template enhancements)
+- spellme: 52d1fed (protocol alignment)
+
 Next:
-- Sync SpellMe to corrected patterns (fix PRINCIPLES.md usage, remove phases, adopt standard sections)
-- Archive `feedback_from_spellme.md` after SpellMe sync complete
+- Align remaining repos to v1 (gym done, spellme done)
 
 ---
 

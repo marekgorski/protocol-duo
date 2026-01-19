@@ -35,18 +35,9 @@ Example format:
 
 ## 🟡 Ready to Build
 
-- [ ] **Sync SpellMe to protocol v1**
-  - AC: Fix PRINCIPLES.md usage (move operational patterns to PATTERNS.md or CLAUDE.md)
-  - AC: Move strategic context from TODO.md to PRFAQ.md
-  - AC: Remove phase-based organization from TODO.md
-  - AC: Add In Progress, Known Issues, Technical Debt sections
-  - AC: Verify Open Questions section in place (not "Decisions Pending ADR")
-  - AC: Archive `feedback_from_spellme.md` after sync complete
-  - Context: Detailed instructions in `feedback_from_spellme.md` "SpellMe Downstream Sync Instructions"
-
 - [ ] **Align remaining repos to v1**
   - AC: Identify all repos using protocol-duo
-  - AC: Run alignment pass on each (gym already done, spellme in progress)
+  - AC: Run alignment pass on each (gym done, spellme done)
   - AC: Capture innovations from each in feedback files
   - AC: All repos on v1 before public launch
 
