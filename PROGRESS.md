@@ -8,7 +8,7 @@
 
 **Context:** Reviewed two demo videos showing protocol in real-world use. Captured step-by-step processing as validation data.
 
-### 3-Min Recap (2x speed)
+### 3-Min Recap (scrolling through completed session)
 
 | Phase | Time | What Happens |
 |-------|------|--------------|
