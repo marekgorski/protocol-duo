@@ -8,6 +8,10 @@
 
 **Context:** Reviewed two demo videos showing protocol in real-world use. Captured step-by-step processing as validation data.
 
+**Videos:**
+- [3-min recap](https://youtube.com/shorts/nYgp3-mNvlg?si=m3o54JYYJ3YresSa) — scrolling through completed session
+- [10-min real-time](https://youtube.com/playlist?list=PLSWL3-4io_SvXFg37VXbrnHKch1rQdCS0&si=8Lef_FrQ93NfRTRL) — live `..builder` workflow
+
 ### 3-Min Recap (scrolling through completed session)
 
 | Phase | Time | What Happens |
