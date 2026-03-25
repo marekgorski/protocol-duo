@@ -1,5 +1,15 @@
 # CLAUDE.md
 
+## Hard Rules — Override Everything, No Exceptions
+
+1. **Files are memory.** Everything in .md files committed to git. No tool-specific persistence (agent memories, session resume). If it's not in a file, it doesn't exist.
+2. **Never fabricate.** Accuracy over impressiveness. Don't invent URLs, API endpoints, facts, or capabilities. Say "I'm not sure" instead.
+3. **RECORD after every interaction.** Update files and commit immediately. Don't batch at session end. This is the compound effect.
+4. **Pre-scan before changes, post-scan after.** Check all references before modifying. Verify 0 stale references after.
+5. **Scope the correction.** When the user gives feedback, change ONLY what was asked. Don't expand scope. State what should NOT change if unclear.
+
+---
+
 Technical reference for Claude Code when working on this project.
 
 **Workflow commands:** When user types `..architect`, `..builder`, or any `..command`, read and follow [ROLE_PROTOCOL.md](./ROLE_PROTOCOL.md).
@@ -181,6 +191,18 @@ See `ROLE_PROTOCOL.md` for full command specifications.
 4. **Default scope is full** — All .md files + 20 git commits loaded every session
 5. **Context files stay lean** — Run `..hygiene` when files grow large
 6. **Accuracy over impressiveness** — Say "I don't know" rather than guess. Clarify rather than assume.
+
+### v1.1 Principles
+
+| Principle | Rule |
+|-----------|------|
+| **Generated beats maintained** | If a file can be rebuilt from source, rebuild it. Don't patch stale context — regenerate. See [PATTERNS.md upgrade path](https://kayg.ee/protocol). |
+| **Files are memory** | .md files in git are the only persistence layer. No agent memories, no session resume. (Also Hard Rule #1.) |
+| **Fewer, louder rules** | Hard Rules at top override everything. The rest is guidance. |
+| **Track execution, not intent** | Done = loop closed. Not "drafted." Not "I'll do it later." |
+| **Name the blocker, not the person** | TASKS/ files named by what's blocked. Test: "Can I resolve this independently?" |
+| **Know your command types** | Rituals (extractable as skills), Cycles (protocol-only), Generators (never extractable), Modes (behavioral switches). |
+| **Scope the correction** | When giving feedback, state what should NOT change. (Also Hard Rule #5.) |
 
 ### Commit Strategy
 
