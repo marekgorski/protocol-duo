@@ -1,6 +1,6 @@
 # duo — Collaborate Protocol
 
-**Version 1.0** — AI works WITH you.
+**Version 1.1** — AI works WITH you.
 
 **Stop explaining your project every session.** duo gives Claude persistent memory through structured documentation.
 
@@ -242,4 +242,23 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ---
 
-*duo Protocol v1*
+## Changelog
+
+- **v1.1** (Mar 26, 2026): Eight Principles From 90 Days
+  - Eight principles extracted from 90 days of production use — each earned by evidence
+  - Hard Rules hierarchy: inviolable rules at top of CLAUDE.md
+  - Voice initialization: first-boot calibration for documentation tone, UI copy, commit style
+  - Command type classification: Rituals, Cycles, Generators, Modes
+  - Backwards compatible with v1.0
+  - Downstream versioning convention: v{canonical}{letter} (e.g., v1.1a)
+
+- **v1.0** (Jan 25, 2026): Official release of protocol-duo
+  - Architect/Builder scope separation
+  - Commands: `..start`, `..architect`, `..builder`, `..make`, `..hygiene`, `..recover`
+  - File patterns: PRFAQ.md, DECISIONS.md, TODO.md, PROGRESS.md, CONSTRAINTS.md
+  - Task ownership: TODO.md (AI work), TASKS/ folder (human work)
+  - Trust & Integrity principles
+
+---
+
+*duo Protocol v1.1 — March 26, 2026*

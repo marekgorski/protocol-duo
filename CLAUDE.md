@@ -64,7 +64,36 @@ After gathering answers, reflect back before proceeding:
 Does this capture it? Anything I'm missing or got wrong?"
 ```
 
-**Step 3: Populate Docs**
+**Step 3: Voice Calibration**
+
+After confirming understanding, calibrate the project's voice. This seeds how AI-generated content sounds — documentation, UI text, copy, commit messages. The real voice emerges from corrections over weeks of use.
+
+**Scope in duo:** Voice applies to all content the AI produces — documentation, UI copy, user-facing text, commit messages, PR descriptions.
+
+Ask these as choices:
+
+1. **Documentation Tone**
+   > "How should docs and README files sound?
+   > - A: Technical and precise (assume expertise)
+   > - B: Conversational but thorough (explain context)
+   > - C: Minimal (just enough to get started)
+   > - Or describe the tone you want."
+
+2. **UI Copy Style**
+   > "For user-facing text (error messages, labels, empty states):
+   > - A: Friendly and helpful ('Oops! No items yet. Add one to get started.')
+   > - B: Clean and neutral ('No items found.')
+   > - C: Technical and direct ('Empty collection. Use POST /items to add.')"
+
+3. **Commit/PR Voice**
+   > "For commit messages and PR descriptions:
+   > - A: Descriptive ('Add user authentication with JWT tokens and refresh flow')
+   > - B: Conventional commits ('feat(auth): add JWT authentication')
+   > - C: Minimal ('add auth')"
+
+Store results in this file under `## Project Voice` (below the Project Overview section). Mark as `Phase: Configured`. After ~30 days of corrections, regenerate from accumulated evidence.
+
+**Step 4: Populate Docs**
 
 Once user confirms, update these files with real content:
 - `PRFAQ.md` — Write press release and FAQs
@@ -76,7 +105,7 @@ Once user confirms, update these files with real content:
 
 Remove all `[PLACEHOLDER]` markers when done.
 
-**Step 4: Confirm Ready**
+**Step 5: Confirm Ready**
 
 ```
 "Project initialized! Here's what I've set up:
@@ -203,6 +232,7 @@ See `ROLE_PROTOCOL.md` for full command specifications.
 | **Name the blocker, not the person** | TASKS/ files named by what's blocked. Test: "Can I resolve this independently?" |
 | **Know your command types** | Rituals (extractable as skills), Cycles (protocol-only), Generators (never extractable), Modes (behavioral switches). |
 | **Scope the correction** | When giving feedback, state what should NOT change. (Also Hard Rule #5.) |
+| **Seed the voice, grow the style** | Initialize voice at first boot via calibration questions. Refine from corrections. Regenerate from evidence at ~30 days. The seed accelerates — it doesn't replace 90 days of learning. |
 
 ### Commit Strategy
 
