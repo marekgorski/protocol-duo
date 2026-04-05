@@ -18,7 +18,7 @@ Technical reference for Claude Code when working on this project.
 
 **On ANY first interaction** — whether "hello", "let's start", `..architect`, or a paragraph of instructions — execute this boot sequence before responding:
 
-1. **Read ALL `.md` files** in the project root
+1. **Read ALL `.md` files** in the project root (including ESSENCE.md)
 2. **Scan TASKS/ folder** — read all task files
 3. **Read last 20 git commits:** `git log --oneline -20`
 4. **Check git status:** `git status`
@@ -64,11 +64,26 @@ After gathering answers, reflect back before proceeding:
 Does this capture it? Anything I'm missing or got wrong?"
 ```
 
-**Step 3: Voice Calibration**
+**Step 3: Voice Identity**
 
-After confirming understanding, calibrate the project's voice. This seeds how AI-generated content sounds — documentation, UI text, copy, commit messages. The real voice emerges from corrections over weeks of use.
+After confirming understanding, discover the project's voice influences. These seed the ESSENCE.md file — the three-influence model that shapes how AI-generated content sounds.
 
-**Scope in duo:** Voice applies to all content the AI produces — documentation, UI copy, user-facing text, commit messages, PR descriptions.
+Ask these one at a time, conversationally:
+
+1. **Structure Influence**
+   > "Who writes and structures information in a way you admire? Someone whose writing makes complex things feel organized."
+
+2. **Clarity Influence**
+   > "Who writes in a way that creates clarity from information — makes obvious things obvious, reframes what everyone already knows?"
+
+3. **Voice Influence**
+   > "Who speaks in a way you admire their speaking? Someone whose tone or delivery you'd want this project to echo."
+
+After answers, populate ESSENCE.md with the three influences and initial craft rules derived from them. Mark as `Phase: Configured`.
+
+**Step 4: Voice Calibration**
+
+Now calibrate the specifics. This refines how the voice influences apply to all content the AI produces — documentation, UI copy, user-facing text, commit messages, PR descriptions.
 
 Ask these as choices:
 
@@ -93,22 +108,24 @@ Ask these as choices:
 
 Store results in this file under `## Project Voice` (below the Project Overview section). Mark as `Phase: Configured`. After ~30 days of corrections, regenerate from accumulated evidence.
 
-**Step 4: Populate Docs**
+**Step 5: Populate Docs**
 
 Once user confirms, update these files with real content:
 - `PRFAQ.md` — Write press release and FAQs
 - `DECISIONS.md` — Document initial architecture choices
 - `TODO.md` — Create prioritized task list
-- `CLAUDE.md` — Replace this section with project-specific technical reference
+- `ESSENCE.md` — Populate with voice influences from Step 3
+   - `CLAUDE.md` — Replace this section with project-specific technical reference
 - `README.md` — Replace template README with project-specific description
 - `PROGRESS.md` — Fill in the initialization session entry with actual details
 
 Remove all `[PLACEHOLDER]` markers when done.
 
-**Step 5: Confirm Ready**
+**Step 6: Confirm Ready**
 
 ```
 "Project initialized! Here's what I've set up:
+- ESSENCE.md: [voice identity seeded]
 - PRFAQ.md: [brief summary]
 - DECISIONS.md: [key decisions]
 - TODO.md: [top priorities]
@@ -116,14 +133,14 @@ Remove all `[PLACEHOLDER]` markers when done.
 - README.md: [project description]
 - PROGRESS.md: [initialization session logged]
 
-By default, I load full project context every session — all your docs, decisions, and history. This gives me the full picture for any kind of work.
-
-When you're deep in implementation and want faster sessions, use `..builder` — I'll load just the essentials and focus on executing.
+Use `..ss` to start a session. Full context loaded by default.
+Use `..cs` to close a session. Context fossilized before ending.
+Use `..builder` for lean implementation sessions.
 
 What would you like to tackle first?"
 ```
 
-**Step 5: Commit & Push**
+**Step 7: Commit & Push**
 
 After user confirms, commit and push all changes:
 
@@ -205,12 +222,13 @@ Each repo's learnings strengthen the collective. When you discover patterns that
 
 | Command | Purpose |
 |---------|---------|
-| `..start` | Load full context, show priorities |
+| `..ss` | **Start session** — Load full context, show priorities |
+| `..cs` | **Close session** — Fossilize context: update TODO.md, PROGRESS.md, DECISIONS.md, commit |
 | `..make` | Design a feature, write specs |
 | `..hygiene` | Archive old content, prune files |
 | `..recover` | Emergency recovery from crashes |
 
-See `ROLE_PROTOCOL.md` for full command specifications.
+`..start` is an alias for `..ss`. See `ROLE_PROTOCOL.md` for full command specifications.
 
 ### Quick Rules
 
@@ -221,7 +239,7 @@ See `ROLE_PROTOCOL.md` for full command specifications.
 5. **Context files stay lean** — Run `..hygiene` when files grow large
 6. **Accuracy over impressiveness** — Say "I don't know" rather than guess. Clarify rather than assume.
 
-### v1.1 Principles
+### v1.2 Principles
 
 | Principle | Rule |
 |-----------|------|
@@ -233,6 +251,19 @@ See `ROLE_PROTOCOL.md` for full command specifications.
 | **Know your command types** | Rituals (extractable as skills), Cycles (protocol-only), Generators (never extractable), Modes (behavioral switches). |
 | **Scope the correction** | When giving feedback, state what should NOT change. (Also Hard Rule #5.) |
 | **Seed the voice, grow the style** | Initialize voice at first boot via calibration questions. Refine from corrections. Regenerate from evidence at ~30 days. The seed accelerates — it doesn't replace 90 days of learning. |
+| **Structure is the owner** | If you have to ask who owns it, the structure is wrong. Structure encodes three things: who acts (file location), when it's done (acceptance criteria at planning time), and who verifies (criteria exist before work starts). |
+| **Build the fence, not the net** | Prevent at the input what you'd otherwise catch at the output. Fences (Hard Rules, CONSTRAINTS.md, hooks) prevent bad output. Nets (review checklists) catch it after. Design fences first. |
+
+### Harness (Claude Code)
+
+This repo includes `.claude/settings.json` with hooks that mechanically enforce Hard Rules:
+
+| Hook | Enforces | What It Does |
+|---|---|---|
+| PreToolUse (Write/Edit) | #1: Files are memory | Blocks writes to `~/.claude/` — forces persistence into repo .md files |
+| Stop | #3: RECORD after every interaction | Blocks session end until TODO.md, PROGRESS.md, and DECISIONS.md are updated and committed |
+
+If you're not using Claude Code, these rules still apply — they're just enforced by instruction rather than structure.
 
 ### Commit Strategy
 
@@ -318,6 +349,7 @@ See `TASKS_README_TEMPLATE.md` for task file format and examples.
 ```
 [PROJECT_NAME]/
 ├── CLAUDE.md           # Technical reference (this file)
+├── ESSENCE.md          # Voice identity (three influences, traits, anti-patterns)
 ├── PRFAQ.md            # Product vision (Press Release + FAQ)
 ├── TODO.md             # Claude's tasks (AI work)
 ├── TASKS/              # Human tasks (only a human can do)

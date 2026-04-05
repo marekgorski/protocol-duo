@@ -1,5 +1,7 @@
-# Claude Code
-.claude/
+# Claude Code — settings.json travels (hooks), settings.local.json stays local (permissions)
+.claude/*
+!.claude/settings.json
+!.claude/commands/
 
 # Dependencies
 node_modules/

@@ -1,4 +1,4 @@
-# duo AI Workflow Protocol (v1.0)
+# duo AI Workflow Protocol (v1.2)
 
 ## Atomic Interaction Contract
 
@@ -209,7 +209,9 @@ Blocks: VideoWalkthrough.tsx implementation
 
 ## Operational Commands
 
-### ..start
+### ..ss (Start Session)
+
+**Alias:** `..start`
 
 **Session Bootloader (Full Scope)**
 
@@ -369,6 +371,47 @@ When `..builder` is active, the atomic cycle handles implementation automaticall
 - What's next
 
 **This happens after EVERY interaction, not just at "session end."** Fossilization is continuous, not batched.
+
+---
+
+### ..cs (Close Session)
+
+**Session Fossilization (Any Scope)**
+
+**Purpose:** Universal session close. Ensures context is preserved for the next session.
+
+**Step 1: Verify Tasks**
+- For each task worked on, check acceptance criteria
+- AC met → mark `[x]` in TODO.md or move to TASKS/DONE/
+- AC not met → note what's missing, don't mark complete
+
+**Step 2: Update Documentation**
+- TODO.md — mark completed tasks, add new tasks discovered
+- PROGRESS.md — add session entry (newest at top): what was done, files changed, decisions made
+- DECISIONS.md — log any architectural decisions made this session
+
+**Step 3: Commit and Push**
+- `git add -A && git commit -m "docs: [summary]" && git push`
+
+**Response:**
+```
+"Session closed.
+
+**Completed:**
+- [x] [Task] — AC verified ✅
+
+**Decisions logged:**
+- [ADR if any]
+
+**New tasks:**
+- [ ] [Task]
+
+**Progress logged.** Committed: [hash]
+
+Next session: run `..ss` to pick up where we left off."
+```
+
+**Relationship to atomic RECORD:** `..cs` is the explicit session close. The atomic RECORD step runs after every interaction. `..cs` adds: task verification, session summary in PROGRESS.md, and explicit commit. Use `..cs` when ending a session. The atomic cycle handles everything in between.
 
 ---
 
@@ -853,4 +896,4 @@ When Claude sees a potential issue, it should:
 
 ---
 
-*duo Protocol v1*
+*duo Protocol v1.2*
