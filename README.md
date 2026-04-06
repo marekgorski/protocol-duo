@@ -1,6 +1,6 @@
 # duo — Collaborate Protocol
 
-**Version 1.1** — AI works WITH you.
+**Version 1.2.1** — AI works WITH you.
 
 **Stop explaining your project every session.** duo gives Claude persistent memory through structured documentation.
 
@@ -273,4 +273,4 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ---
 
-*duo Protocol v1.1 — March 26, 2026*
+*duo Protocol v1.2.1 — April 6, 2026*
