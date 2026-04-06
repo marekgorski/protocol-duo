@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.file_path // empty' | { read -r f; case \"$f\" in \"$HOME\"/.claude/*) echo '{\"decision\":\"block\",\"reason\":\"BLOCKED — Hard Rule #1: Files are memory. All persistence lives in .md files tracked by git, not in ~/.claude/. Retry this write to the correct repo file (DECISIONS.md, PROGRESS.md, TODO.md, or the relevant .md file).\"}';; esac; }",
+            "command": "python3 -c \"import sys,json; print(json.load(sys.stdin).get('tool_input',{}).get('file_path',''))\" 2>/dev/null | { read -r f; case \"$f\" in \"$HOME\"/.claude/*) echo '{\"decision\":\"block\",\"reason\":\"BLOCKED — Hard Rule #1: Files are memory. All persistence lives in .md files tracked by git, not in ~/.claude/. Retry this write to the correct repo file (DECISIONS.md, PROGRESS.md, TODO.md, or the relevant .md file).\"}';; esac; }",
             "timeout": 5
           }
         ]
