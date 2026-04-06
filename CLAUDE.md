@@ -133,7 +133,7 @@ Remove all `[PLACEHOLDER]` markers when done.
 - README.md: [project description]
 - PROGRESS.md: [initialization session logged]
 
-Use `..ss` to start a session. Full context loaded by default.
+Use `..gm` for a status briefing. Full context loaded automatically by hook.
 Use `..cs` to close a session. Context fossilized before ending.
 Use `..builder` for lean implementation sessions.
 
@@ -222,13 +222,13 @@ Each repo's learnings strengthen the collective. When you discover patterns that
 
 | Command | Purpose |
 |---------|---------|
-| `..ss` | **Start session** — Load full context, show priorities |
+| `..gm` | **Status briefing** — Priorities, blockers, task status (on demand) |
 | `..cs` | **Close session** — Fossilize context: update TODO.md, PROGRESS.md, DECISIONS.md, commit |
 | `..make` | Design a feature, write specs |
 | `..hygiene` | Archive old content, prune files |
 | `..recover` | Emergency recovery from crashes |
 
-`..start` is an alias for `..ss`. See `ROLE_PROTOCOL.md` for full command specifications.
+Boot sequence runs automatically via SessionStart hook — no manual start command needed. `..gm` is on-demand ("brief me"). See `ROLE_PROTOCOL.md` for full command specifications.
 
 ### Quick Rules
 
@@ -260,8 +260,9 @@ This repo includes `.claude/settings.json` with hooks that mechanically enforce 
 
 | Hook | Enforces | What It Does |
 |---|---|---|
+| SessionStart | Boot sequence | Records session HEAD, injects boot sequence reminder — ensures context is loaded before first response |
 | PreToolUse (Write/Edit) | #1: Files are memory | Blocks writes to `~/.claude/` — forces persistence into repo .md files |
-| Stop | #3: RECORD after every interaction | Blocks session end until TODO.md, PROGRESS.md, and DECISIONS.md are updated and committed |
+| Stop | #3: RECORD after every interaction | Blocks session end if changes were made but TODO.md, PROGRESS.md, and DECISIONS.md were not updated. Read-only sessions pass silently. |
 
 If you're not using Claude Code, these rules still apply — they're just enforced by instruction rather than structure.
 
@@ -334,7 +335,7 @@ TASKS/
 └── DONE/         # Completed (consolidated monthly)
 ```
 
-**Claude's responsibilities each `..start`:**
+**Claude's responsibilities each session:**
 1. Review all TASKS/ files against current context
 2. Move between folders as situation changes
 3. Create new task files when human action needed
