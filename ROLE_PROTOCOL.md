@@ -50,7 +50,7 @@ Each repo's learnings strengthen the collective. See [KayGee Protocol Family](ht
 | `lean_mode: off` | **Free flow.** Commands work without explicit scope switching. Claude loads context as needed. |
 
 **How it works:**
-- When `lean_mode: on` — Scope checks in `..start`, `..make` are **enforced**. Claude stops and asks user to set scope.
+- When `lean_mode: on` — Scope checks in `..gm`, `..make` are **enforced**. Claude stops and asks user to set scope.
 - When `lean_mode: off` — Scope checks are **advisory**. Claude notes the intended scope but proceeds with the command.
 
 **Default:** `off` (set in CLAUDE.md). Change to `on` for large projects where faster boot matters.
@@ -61,7 +61,7 @@ Each repo's learnings strengthen the collective. See [KayGee Protocol Family](ht
 
 | Workflow | Sequence |
 |----------|----------|
-| **Design** | `..architect` → `..start` → `..make` → (atomic RECORD commits) |
+| **Design** | `..architect` → `..gm` → `..make` → (atomic RECORD commits) |
 | **Build** | `..builder` → (atomic cycle runs) |
 | **Maintenance** | `..architect` → `..hygiene` → (atomic RECORD commits) |
 | **Recovery** | `..recover` (Any scope) |
@@ -77,7 +77,7 @@ Location encodes ownership — no markers needed:
 | **TODO.md** | Claude | AI tasks — work Claude does |
 | **TASKS/** | Human | Tasks only a human can do |
 
-**Handoff pattern:** When Claude prepares something a human must execute (e.g., a draft to review and send), Claude creates the deliverable and adds a task file in `TASKS/PRIORITY/` pointing to it. When a human makes a decision that unblocks AI work, they add the outcome to the task file in `TASKS/DONE/` and Claude picks up dependent work on next `..start`.
+**Handoff pattern:** When Claude prepares something a human must execute (e.g., a draft to review and send), Claude creates the deliverable and adds a task file in `TASKS/PRIORITY/` pointing to it. When a human makes a decision that unblocks AI work, they add the outcome to the task file in `TASKS/DONE/` and Claude picks up dependent work on next `..gm`.
 
 ### TODO.md Format
 
@@ -155,7 +155,7 @@ Contains: Script outline, recording tips, upload instructions
 Blocks: VideoWalkthrough.tsx implementation
 ```
 
-### Claude reprioritizing tasks (each ..start)
+### Claude reprioritizing tasks (each ..gm)
 
 1. Review all TASKS/ files against current context
 2. Move between folders as situation changes:
@@ -168,7 +168,7 @@ Blocks: VideoWalkthrough.tsx implementation
 
 1. Add outcome to task file (decision, URL, confirmation number)
 2. Move to `TASKS/DONE/` or tell Claude in next session
-3. Claude checks TASKS/ on next `..start` or `..builder`
+3. Claude checks TASKS/ on next `..gm` or `..builder`
 4. Claude unblocks dependent work and logs in PROGRESS.md
 
 **Example outcome added to task file:**
@@ -191,7 +191,7 @@ Blocks: VideoWalkthrough.tsx implementation
 **Scope Expansion:**
 1. **Purpose:** System design, strategy, planning, validating "what good looks like"
 2. **Context Scope:** FULL (PRFAQ, CONSTRAINTS, DECISIONS, CLAUDE, TODO, PROGRESS, TASKS/)
-3. **Allowed Commands:** `..start`, `..make`, `..hygiene`
+3. **Allowed Commands:** `..gm`, `..make`, `..hygiene`
 4. **Behavior:** Challenge drift, validate architecture, ask clarifying questions
 5. **Acknowledge:** "🏗️ ARCHITECT SCOPE. Full context loaded. (~15% token budget)"
 
@@ -209,27 +209,24 @@ Blocks: VideoWalkthrough.tsx implementation
 
 ## Operational Commands
 
-### ..ss (Start Session)
+### ..gm (Status Briefing)
 
-**Alias:** `..start`
+**When to use:** Any time you want a status update. Start of day, start of session, or on demand.
 
-**Session Bootloader (Full Scope)**
+**Note:** The SessionStart hook already loads all context automatically. `..gm` adds the human-facing briefing on top — priorities, risks, what needs attention.
 
 **Step 1: Scope Verification**
 - Check `lean_mode` in CLAUDE.md
-- IF `lean_mode: on` AND Scope != FULL: **Stop.** Reply: "⛔ **Builder Optimization:** Builders should skip `..start` — the atomic cycle runs automatically in lean scope."
-- IF `lean_mode: off`: Proceed (note: this loads full Architect context)
+- IF `lean_mode: on` AND Scope != FULL: **Stop.** Reply: "⛔ **Builder Optimization:** Builders should skip `..gm` — the atomic cycle runs automatically in lean scope."
+- IF `lean_mode: off`: Proceed
 
-**Step 2: Context Loading (LOAD step of atomic cycle)**
-- Read: PRFAQ, CONSTRAINTS, DECISIONS, CLAUDE, TODO, PROGRESS, TASKS/.
-
-**Step 3: Status Report**
+**Step 2: Status Report**
 - Report top priority task from TODO.md (including acceptance criteria).
 - Note any completed tasks in TASKS/DONE/ that unblock work.
 - Flag stale human tasks in TASKS/ (>7 days no progress).
 - Wait for `..make` or `..hygiene`.
 
-**Step 4: Task Analysis**
+**Step 3: Task Analysis**
 - Identify human tasks in TASKS/ where Claude could prepare something (draft, research, spec)
 - Suggest task splits if a human task has Claude-doable subcomponents
 
@@ -408,7 +405,7 @@ When `..builder` is active, the atomic cycle handles implementation automaticall
 
 **Progress logged.** Committed: [hash]
 
-Next session: run `..ss` to pick up where we left off."
+Next session: run `..gm` to pick up where we left off."
 ```
 
 **Relationship to atomic RECORD:** `..cs` is the explicit session close. The atomic RECORD step runs after every interaction. `..cs` adds: task verification, session summary in PROGRESS.md, and explicit commit. Use `..cs` when ending a session. The atomic cycle handles everything in between.
@@ -694,7 +691,7 @@ Before Builder implements UI, document:
 | Skipping RECORD step | Docs out of sync | Atomic cycle makes RECORD automatic |
 | AI work in TASKS/ or human work in TODO.md | Wrong owner, task stuck or wasted effort | TODO.md = AI work, TASKS/ = human work |
 | Human task without blocker note | Unclear what's waiting | Always note "Blocks: X" in task file |
-| Stale human tasks | Work stuck indefinitely | `..start` flags >7 day tasks |
+| Stale human tasks | Work stuck indefinitely | `..gm` flags >7 day tasks |
 | Ignoring context drift | Stale code conflicts | LOAD phase checks git pull |
 | **Push before docs updated** | **Memory lost, context drift** | **Atomic RECORD commits docs every interaction** |
 | **Big-bang commits** | **Token crash loses all work** | **Atomic cycle: commit after every interaction** |
