@@ -244,6 +244,18 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ## Changelog
 
+- **v1.2.1** (Apr 6, 2026): Hook Architecture Fix
+  - SessionStart hook: records session HEAD, enforces boot sequence via `additionalContext`
+  - PreToolUse widened: blocks all `~/.claude/` writes, not just two subdirectories
+  - Stop hook redesigned: read-only sessions pass silently, checks committed + pending + staged changes
+  - Command simplification: `..ss`/`..start` removed (hook does boot), `..gm` promoted to universal status briefing
+
+- **v1.2** (Apr 5, 2026): Structure That Earns Trust
+  - Two new principles: #9 (Structure Is the Owner), #10 (Build the Fence, Not the Net)
+  - ESSENCE.md: per-repo voice identity file with four minimum sections
+  - Harness layer: `.claude/settings.json` ships in canonical with PreToolUse + Stop hooks
+  - Protocol/harness split: .md files = protocol (portable), .claude/ = harness (CC enforcement)
+
 - **v1.1** (Mar 26, 2026): Eight Principles From 90 Days
   - Eight principles extracted from 90 days of production use — each earned by evidence
   - Hard Rules hierarchy: inviolable rules at top of CLAUDE.md
