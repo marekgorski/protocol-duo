@@ -1,6 +1,6 @@
 # duo — Collaborate Protocol
 
-**Version 1.2.1** — AI works WITH you.
+**Version 1.2.2** — AI works WITH you.
 
 **Stop explaining your project every session.** duo gives Claude persistent memory through structured documentation.
 
@@ -244,6 +244,13 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ## Changelog
 
+- **v1.2.2** (May 10, 2026): Coaching Philosophy
+  - Stop hook simplified — catches uncommitted changes only; PROGRESS/TODO/DECISIONS diff policing removed
+  - Coaching framing: hooks coach the playbook (remind, catch drift); they don't enforce or punish
+  - Hard Rule #3 scoped to substantive interactions — quick read-only checks don't require RECORD entries
+  - Two new anti-patterns: hooks as taskmasters; concurrent sessions without isolation
+  - Production evidence: 29 days clean on a simplified hook in one production deployment; another ran hookless cleanly
+
 - **v1.2.1** (Apr 6, 2026): Hook Architecture Fix
   - SessionStart hook: records session HEAD, enforces boot sequence via `additionalContext`
   - PreToolUse widened: blocks all `~/.claude/` writes, not just two subdirectories
@@ -273,4 +280,4 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ---
 
-*duo Protocol v1.2.1 — April 6, 2026*
+*duo Protocol v1.2.2 — May 10, 2026*
