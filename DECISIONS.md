@@ -196,6 +196,51 @@ Add three new sections to TODO.md template:
 
 ---
 
+### ADR-005: v1.3 Structural Discipline — five layers move at once
+
+**Status:** Accepted
+**Date:** 2026-05-18
+
+**Context:**
+v1.2 shipped the coaching philosophy (hooks remind rather than punish). v1.2.2 simplified the Stop hook after 29 days clean production data on one production deployment. By 2026-05-18 the locus of discipline was still rules+hook-enforcement — declarative anti-patterns caught failures at output, not input.
+
+Multiple mid-2026 signals converged on the same operationalisation of Principle #10: move discipline from declarative anti-patterns to write-time structural gates. Convergent across sources, with date-stamped case studies — meeting the case-study bar that v1.3 also codifies.
+
+**Decision:**
+v1.3 moves five layers in a single release because they're load-bearing on each other:
+
+| Layer | Before | After |
+|---|---|---|
+| Rule creation | Rules added on conviction, trimmed at audit | Hard Rule #6: case-study gate at the moment a rule is written (case study AND level designation) |
+| Schema | Pre-deployment 4-type front-matter; status field rotted to 30+ snowflake values at scale | At-scale-proven `type/updated/summary` schema migrates in with 60-day compat shim |
+| Harness | Coaching philosophy with simplified hooks still policing every interaction | Hookless `{ "hooks": {} }` becomes canonical default; hooks remain available as opt-in |
+| Falsification | Public commitments published; nobody watching them | a dedicated folder watches each commitment with explicit promotion criteria + falsification triggers |
+| RC mechanism | Release candidates ad-hoc; V1.2.2 was the worked example without the rule | a release-candidate carve-out with 5 conditions and named promotion triggers |
+
+Plus foundational protocol-vs-flavour stratification: Hard Rules sit at TWO levels (protocol-level = the brewery, constants; flavour-level = the recipe, this canonical template's specific rules). duo gets its first flavour-level Hard Rule in v1.3: *D1. Docs travel with code* — convergent invention in two production deployments verbatim.
+
+Plus new anti-pattern: *"Celebrating a primitive by over-implementing it"* — codifies the v1.2 hook deployment lesson so the next harness primitive doesn't trigger the same over-implementation reflex.
+
+**Alternatives Considered:**
+- Stay at v1.2.x and iterate philosophy further — Risk: the locus stays in rules+hooks; the structural-gate insight gets lost
+- Ship each layer separately as v1.2.3 / v1.2.4 / v1.2.5 — Risk: the layers are load-bearing on each other (case-study gate without level designation = muddled; schema without compat shim = forced fleet sync timing; hookless without anti-pattern fence = same celebration reflex on next primitive)
+- Ship as v2.0 — The shift is a paradigm shift but builds on v1.2.x foundations rather than replacing them; minor bump (v1.3) signals continuity with significance
+
+**Consequences:**
+- ✅ Audits become lookups (does the rule cite a case study?) rather than judgment calls
+- ✅ Schema reconciliation unblocks fleet `..sync` (duo repos lagging finally migrate)
+- ✅ Hookless retires v1.2 over-implementation; harness gets out of the way unless a specific gap is named
+- ✅ Public commitments get a structural watching mechanism (incubation folder)
+- ✅ Protocol-vs-flavour stratification clears asymmetry-vs-distinction confusion (the DECISIONS.md presence and CLAUDE.md-shape distinctions no longer "drift")
+- ⚠️ Migration cost: existing front-matter files need sed migration (compat shim 60 days)
+- ⚠️ Repos resistant to hookless migration may stay on simplified hooks indefinitely (opt-in pattern, not enforced)
+
+**Public articulation:** kayg.ee/learn/structural-discipline (live 2026-05-17 ahead of canonical).
+
+**Source-of-truth:** the v1.3 patch brief — 14-item dispositioned brief; 9 PROMOTE applied this release; 5 DEFER documented in changelog with re-evaluation triggers.
+
+---
+
 ## Template: New ADR
 
 Copy this when adding decisions:

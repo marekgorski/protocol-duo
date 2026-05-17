@@ -2,11 +2,34 @@
 
 ## Hard Rules — Override Everything, No Exceptions
 
+> **All Hard Rules below are protocol-level** (apply across every flavour in the kaygee family — uno, duo, tre). Flavour-level rules specific to duo (Construct) live in the *"Flavour-Specific Rules"* section below. See the kaygee protocol family overview at [kayg.ee/protocol](https://kayg.ee/protocol) for the brewery-and-recipe stratification (v1.3, 2026-05-18).
+
 1. **Files are memory.** Everything in .md files committed to git. No tool-specific persistence (agent memories, session resume). If it's not in a file, it doesn't exist.
 2. **Never fabricate.** Accuracy over impressiveness. Don't invent URLs, API endpoints, facts, or capabilities. Say "I'm not sure" instead.
 3. **RECORD after every substantive interaction.** Update files and commit when work produces changes worth capturing. Quick read-only checks and context loads do not require RECORD entries. Don't batch substantive work at session end. This is the compound effect.
 4. **Pre-scan before changes, post-scan after.** Check all references before modifying. Verify 0 stale references after.
 5. **Scope the correction.** When the user gives feedback, change ONLY what was asked. Don't expand scope. State what should NOT change if unclear.
+6. **Case-study gate at rule-creation (v1.3).** Every new rule, Hard Rule clause, anti-pattern row, or extension block must cite both a **case study** (a date-stamped incident, a numbered principle reference, or a named worked example) AND a **level designation** (protocol-level or flavour-level). Rules without both are deletion candidates at the next audit. Applies to new rules from 2026-05-18 forward; existing rules are not retroactively gated.
+
+---
+
+## Flavour-Specific Rules
+
+Hard Rules below this line apply because you chose the **duo (Construct)** flavour — they're the recipe, not the brewery.
+
+### D1. Docs travel with code (v1.3 — flavour-level Hard Rule for duo only)
+
+After any code change, commit the matching documentation update in the same push. If the code change is small enough that no doc update is needed, the commit message MUST state so explicitly (e.g., "no doc impact").
+
+**Why this is flavour-level:** duo is the Construct flavour — building bounded things with code. The temporal coupling between code change and doc change is specific to construction work. uno (Operate) is doc-only substrate; tre (Automate) is multi-party orchestration where code↔doc coupling doesn't carry the same load.
+
+**What "matching documentation" means in duo:**
+- New feature → PRFAQ.md or DECISIONS.md entry + relevant ROLE_PROTOCOL.md update if commands change
+- Bug fix → TODO.md entry marked done + PROGRESS.md note if user-facing
+- Refactor → DECISIONS.md if architecture-affecting; otherwise commit-message-only is acceptable
+- Dependency bump → CHANGELOG.md or equivalent
+
+**Case study:** Convergent invention May 2026 — two production deployments independently codified the verbatim wording *"After a code change, commit the matching doc update in the same push."* Two-repo convergence with identical phrasing meets the case-study gate (Hard Rule #6) at the flavour level.
 
 ---
 
@@ -256,22 +279,21 @@ Boot sequence runs automatically via SessionStart hook — no manual start comma
 
 ### Harness (Claude Code)
 
-This repo includes `.claude/settings.json` with hooks that coach the playbook — they remind, catch drift, and never punish:
+This repo ships hookless by default (v1.3, 2026-05-18). `.claude/settings.json` carries `{ "hooks": {} }` — the playbook (these .md files) does the protocol work; the harness stays out of the way.
 
-| Hook | Coaching behaviour | What It Does |
-|---|---|---|
-| SessionStart | Loads your context | Records session HEAD, injects boot sequence reminder — ensures context is loaded before first response |
-| PreToolUse (Write/Edit) | Keeps your memory in the repo | Blocks writes to `~/.claude/` — forces persistence into repo .md files |
-| Stop | Unsaved work guard | Reminds you to commit before ending — catches uncommitted changes |
+**Why hookless:** v1.2 shipped 3 hooks (SessionStart, PreToolUse, Stop) to all canonical repos. Two independent reports found per-interaction policing harmful (overhead > value). v1.2.2 simplified to a Stop-on-uncommitted-changes coach. v1.3 retires hooks as canonical default — a production deployment ran hookless cleanly through April–May 2026, proving the protocol works without them. The case-study gate (Hard Rule #6) now prevents future "celebrate the primitive by binding every lifecycle moment" failure modes.
 
-The playbook works without the coach (any LLM can read .md files). The coach makes it consistent in Claude Code.
+**Opt-in: simplified Stop hook.** If you want a commit nudge on session end, see the kaygee protocol family at [kayg.ee/protocol](https://kayg.ee/protocol) for the opt-in pattern documentation. The minimal binding: a Stop hook that blocks on uncommitted changes only. Don't bind SessionStart or PreToolUse unless you can name a specific protocol gap they fill.
 
 ### Anti-Patterns
 
-| Anti-Pattern | Consequence | Prevention |
-|--------------|-------------|------------|
-| Hooks as taskmasters | Per-interaction policing creates overhead exceeding value. Punishment causes resistance. | Hooks coach (remind, catch drift). They don't punish. PreToolUse memory guard = correct coach. Stop hook policing TODO/PROGRESS/DECISIONS diffs = incorrect taskmaster. |
-| Concurrent sessions without isolation | One session's writes block another session's Stop hook. | Designate one session read-only, or use `isolation: "worktree"` for write-capable subagents. |
+> **Case Study column** added v1.3 (2026-05-18) per Hard Rule #6 case-study gate. New rows from 2026-05-18 forward require a date-stamped case study at row-creation moment.
+
+| Anti-Pattern | Consequence | Prevention | Case Study |
+|--------------|-------------|------------|------------|
+| Hooks as taskmasters | Per-interaction policing creates overhead exceeding value. Punishment causes resistance. | Hooks coach (remind, catch drift). They don't punish. v1.3 retired hooks as canonical default — see Harness section. | 2026-04 two independent deployment reports → V1.2.2 simplified (2026-05-10) → v1.3 hookless (2026-05-18) |
+| Concurrent sessions without isolation | One session's writes block another session's Stop hook. | Designate one session read-only, or use `isolation: "worktree"` for write-capable subagents. | 2026-04-25 worktree boundary matrix codification |
+| **Celebrating a primitive by over-implementing it** (v1.3) | A new harness primitive ships → reflex is to bind every available lifecycle moment. Half the bindings stop getting used; the other half police every interaction. | Apply the case-study gate (Hard Rule #6) before binding any new harness primitive: name the protocol gap the binding fills. If you can't name the gap, don't bind it. | 2026-03 v1.2 hook deployment to all 10 repos (3 hooks bound; 6 lifecycle slots eventually used). Two independent reports found hooks-as-taskmasters failure mode. v1.2.2 simplified the surface (2026-05-10); v1.3 retired hooks as canonical default (2026-05-18). ~10 weeks celebration → correction. |
 
 ### Commit Strategy
 

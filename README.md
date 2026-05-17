@@ -1,8 +1,10 @@
-# duo — Collaborate Protocol
+# duo — Construct Protocol
 
-**Version 1.2.2** — AI works WITH you.
+**Version 1.3** — Construction site for building bounded things.
 
 **Stop explaining your project every session.** duo gives Claude persistent memory through structured documentation.
+
+> **v1.3 — Structural Discipline (2026-05-18):** The locus of discipline moves from rules+hook-enforcement to structure that makes failure modes hard to occur. Five layers move together: rule creation (case-study gate) · schema (front-matter `type/updated/summary`) · harness (hookless default) · falsification (watch public commitments) · release-candidate path. Plus protocol-vs-flavour stratification (the brewery and the recipe). New flavour-level Hard Rule for duo: *Docs travel with code* (convergent invention in 2 production repos). See [kayg.ee/learn/structural-discipline](https://kayg.ee/learn/structural-discipline) for the full articulation.
 
 ## The Problem
 
@@ -40,9 +42,9 @@ Now when you return next week, Claude knows your project.
 
 ### Not building code?
 
-For doc-heavy projects without complex architecture (knowledge bases, guides, process docs), use [protocol-uno](https://github.com/marekgorski/protocol-uno) instead. It's the **uno** (Delegate) protocol — simplified for tasks where AI works FOR you without architect/builder role separation.
+For doc-heavy projects without complex architecture (knowledge bases, guides, process docs), use [protocol-uno](https://github.com/marekgorski/protocol-uno) instead. It's the **uno** (Operate) protocol — an OS for managing X (ongoing substrate, not a bounded build).
 
-> **Protocol Family:** This template is part of the [KayGee Protocol Family](https://kayg.ee/protocol). **uno** = Delegate, **duo** = Collaborate (this template), **tre** = Automate.
+> **Protocol Family:** This template is part of the [KayGee Protocol Family](https://kayg.ee/protocol). **uno** = Operate (an ale — top-fermented, monolithic, OS-spec shape), **duo** = Construct (a lager — bottom-fermented, split docs, ADR-shaped — this template), **tre** = Automate (planned). Same brewery; different recipes.
 
 ## Compatibility
 
@@ -244,6 +246,18 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ## Changelog
 
+- **v1.3** (May 18, 2026): Structural Discipline
+  - Theme: locus of discipline moves from rules+hook-enforcement → structure that makes failure modes hard to occur
+  - New Hard Rule #6: Case-study gate at rule-creation (every new rule cites a case study AND a level designation)
+  - New Flavour-Specific Rules section with first entry: *D1. Docs travel with code* (after a code change, commit the matching doc update in the same push) — convergent invention in 2 production repos (two production deployments verbatim)
+  - Front-matter schema migrated to `type/updated/summary` with 60-day compat shim (2026-05-18 → 2026-07-17)
+  - Hookless `{ "hooks": {} }` becomes canonical default; simplified Stop hook is opt-in
+  - Anti-pattern table format adds Case Study column (Hard Rule #6 enforcement)
+  - New anti-pattern: "Celebrating a primitive by over-implementing it" (case study: v1.2 hook deployment → v1.3 hookless retirement, ~10 weeks)
+  - Protocol-vs-flavour stratification codified (the brewery and the recipe — duo is the lager; uno is the ale)
+  - Public articulation: kayg.ee/learn/structural-discipline (live 2026-05-17 ahead of canonical)
+  - Deferred for v1.3.1+: convergence/accretion ratio (Item 6, baseline 2026-06-30), mandatory front-matter (Item 9, paired with schema), /goal as Hard Rule (Item 10, testing window through 2026-06-15), PROGRESS rolling cadence (Item 11), anti-pattern table consolidation (Item 12)
+
 - **v1.2.2** (May 10, 2026): Coaching Philosophy
   - Stop hook simplified — catches uncommitted changes only; PROGRESS/TODO/DECISIONS diff policing removed
   - Coaching framing: hooks coach the playbook (remind, catch drift); they don't enforce or punish
@@ -280,4 +294,4 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ---
 
-*duo Protocol v1.2.2 — May 10, 2026*
+*duo Protocol v1.3 — May 18, 2026*

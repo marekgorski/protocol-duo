@@ -1,38 +1,3 @@
 {
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "REPO=$(git rev-parse --show-toplevel 2>/dev/null); HEAD=$(git -C \"$REPO\" rev-parse HEAD 2>/dev/null); mkdir -p \"$REPO/.claude\" && echo \"$HEAD\" > \"$REPO/.claude/.session_head\" 2>/dev/null; echo '{\"additionalContext\": \"BOOT SEQUENCE (SessionStart hook): Before responding, read ALL .md files in project root, scan TASKS/ folder (PRIORITY/ and BLOCKED/ only), run git log --oneline -20, check git status. This is non-negotiable.\"}'",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 -c \"import sys,json; print(json.load(sys.stdin).get('tool_input',{}).get('file_path',''))\" 2>/dev/null | { read -r f; case \"$f\" in \"$HOME\"/.claude/*) echo '{\"decision\":\"block\",\"reason\":\"BLOCKED — Hard Rule #1: Files are memory. All persistence lives in .md files tracked by git, not in ~/.claude/. Retry this write to the correct repo file (DECISIONS.md, PROGRESS.md, TODO.md, or the relevant .md file).\"}';; esac; }",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "REPO=$(git rev-parse --show-toplevel 2>/dev/null); MARKER=\"$REPO/.claude/.session_head\"; SENTINEL=\"$REPO/.claude/.stop_blocked\"; if [ ! -f \"$MARKER\" ]; then exit 0; fi; if [ -f \"$SENTINEL\" ]; then rm -f \"$SENTINEL\" \"$MARKER\"; exit 0; fi; UNCOMMITTED=$(git -C \"$REPO\" status --porcelain 2>/dev/null | head -1); if [ -z \"$UNCOMMITTED\" ]; then rm -f \"$MARKER\"; exit 0; fi; touch \"$SENTINEL\"; echo '{\"decision\":\"block\",\"reason\":\"STOP — Uncommitted changes detected. Commit your work before ending the session.\"}'",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  }
+  "hooks": {}
 }

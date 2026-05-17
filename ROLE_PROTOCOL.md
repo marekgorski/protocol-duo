@@ -1,4 +1,4 @@
-# duo AI Workflow Protocol (v1.2)
+# duo AI Workflow Protocol (v1.3)
 
 ## Atomic Interaction Contract
 
