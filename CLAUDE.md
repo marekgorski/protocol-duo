@@ -35,11 +35,11 @@ After any code change, commit the matching documentation update in the same push
 
 Technical reference for Claude Code when working on this project.
 
-**Workflow commands:** When user types `..architect`, `..builder`, or any `..command`, read and follow [ROLE_PROTOCOL.md](./ROLE_PROTOCOL.md).
+**Workflow commands:** When user types any `..command`, read and follow [ROLE_PROTOCOL.md](./ROLE_PROTOCOL.md).
 
 ### Boot Sequence (runs every session start)
 
-**On ANY first interaction** — whether "hello", "let's start", `..architect`, or a paragraph of instructions — execute this boot sequence before responding:
+**On ANY first interaction** — whether "hello", "let's start", or a paragraph of instructions — execute this boot sequence before responding:
 
 1. **Read ALL `.md` files** in the project root (including ESSENCE.md)
 2. **Scan TASKS/ folder** — read all task files
@@ -157,8 +157,8 @@ Remove all `[PLACEHOLDER]` markers when done.
 - PROGRESS.md: [initialization session logged]
 
 Use `..gm` for a status briefing. Full context loaded automatically by hook.
-Use `..cs` to close a session. Context fossilized before ending.
-Use `..builder` for lean implementation sessions.
+Use `..cs` to close a session. Context fossilised before ending.
+Use `..wrap` for a periodic deep close after a substantial session.
 
 What would you like to tackle first?"
 ```
@@ -193,29 +193,7 @@ Every interaction follows this cycle automatically:
 
 **Default scope:** Full (all .md files + recent git history — see Boot Sequence above)
 
-**Scope modifiers:**
-- `..architect` — Full context: all docs, decisions, and history loaded
-- `..builder` — Lean context: essentials only (CLAUDE.md, TODO.md, TASKS/)
-
-Without a modifier, use default full scope. The atomic cycle runs regardless of scope.
-
 **Fossilisation is automatic.** The RECORD step commits decisions and context after every substantive interaction. No ceremony required at session end.
-
-### Protocol Settings
-
-Configure protocol behavior per-project:
-
-```
-lean_mode: off
-```
-
-| Setting | Values | Effect |
-|---------|--------|--------|
-| `lean_mode` | `on` / `off` | **on:** Load essentials only (CLAUDE.md + TODO.md + TASKS/). Faster boot, less context. Use `..architect` to expand. **off:** Full boot sequence — all .md files + git history loaded every session. |
-
-**Default:** `off` (full context). Set to `on` for large projects where faster boot matters.
-
-**To change:** Edit the `lean_mode` line above. Claude reads this on each session.
 
 ### Protocol Evolution Philosophy
 
@@ -234,19 +212,13 @@ Each repo's learnings strengthen the collective. When you discover patterns that
 
 **Important:** Always ask the user before preparing or submitting an innovation report. Never auto-report.
 
-### Scope Modifiers
-
-| Modifier | Scope | Purpose |
-|----------|-------|---------|
-| `..architect` | Full | Load all project docs, decisions, and history |
-| `..builder` | Lean | Load essentials only — focus on executing |
-
 ### Operational Commands
 
 | Command | Purpose |
 |---------|---------|
 | `..gm` | **Status briefing** — Priorities, blockers, task status (on demand) |
 | `..cs` | **Close session** — Fossilize context: update TODO.md, PROGRESS.md, DECISIONS.md, commit |
+| `..wrap` | **Deep close** — Periodic deep close: compound learnings, fence failures, reconcile tasks, verify. Ends with `..cs`. |
 | `..make` | Design a feature, write specs |
 | `..hygiene` | Archive old content, prune files |
 | `..recover` | Emergency recovery from crashes |

@@ -87,11 +87,35 @@ Claude reflects back understanding. Confirm or correct.
 
 Start building. Claude handles context automatically.
 
-Optional scope overrides:
-- `..architect` — Expands context (loads PRFAQ, DECISIONS, CONSTRAINTS — the full picture)
-- `..builder` — Keeps context lean (CLAUDE.md + TODO.md only — focused execution)
+### Recommended: `..wrap`
 
-These are optional. The protocol works without them.
+Use `..wrap` as a periodic deep close — after a session that did substantial work, introduced decisions, or corrected earlier claims. It compounds learnings into permanent homes, fences failures, reconciles tasks, and ends with `..cs`.
+
+See [ROLE_PROTOCOL.md](ROLE_PROTOCOL.md) for the full `..wrap` prompt text. For a keyboard-expander paste, see the prompts below.
+
+**Full version** (for Espanso / Raycast / TextExpander, or paste at session end):
+
+```
+You are the steward of this repo's memory, closing out a session that did real work. The repo already holds most of what matters — principles, constraints, decisions, tasks — and your job is to make this session's work compound into it, not pile up beside it. So your habit is to read before you write: before you add anything, you open the file it belongs in and check what's already there. The thing you are fighting is the near-duplicate — a fresh entry that says almost what an existing one already says. When you find the entry that covers the ground, you sharpen it instead of adding a rival. Everything you record lives in a repo file the next session will load — never in tool or agent memory, which doesn't travel in git. And you don't trust a claim until the file shows it: the files are the memory; if a change isn't in them, it didn't happen. Any pass below can come up empty — say so plainly and move on; never manufacture an entry to fill a section.
+
+Work through the session in this order.
+
+Start with what you learned. Take each learning and go find where it already lives — the principles home (PRINCIPLES.md, or the Principles section of CLAUDE.md), the constraints home (CONSTRAINTS.md, or the Constraints section of CLAUDE.md), the decisions log (DECISIONS.md, if this repo keeps one), or wherever this repo keeps such notes (e.g. a LEARNINGS file). Read what is already there before you touch it. If an entry covers the ground, merge your learning in and leave it sharper. Write a new entry only once you've looked and nothing fits. While you're in each home, check whether a decision this session made has left an earlier claim now false — if so, correct that claim in every current-state place it appears (leave append-only logs alone). Note where each change went.
+
+Next, account for what went wrong. List what the session got wrong, redid, or corrected. For each, check whether an existing rule or constraint already speaks to it — if so, tighten that one; if not, write the fence that stops it recurring, into a repo file. Prevent at the input what you'd otherwise keep catching at the output. A failure you can't fence is the most important thing to surface.
+
+Next, reconcile the work. Check each task you closed against its full acceptance criteria; if anything shipped short, capture the remainder as a narrower task before removing the original. Write down any open item that won't resurface on its own next session. File handoffs where the right party will find them — work a human must action in TASKS/, finished human work in TASKS/DONE/.
+
+Next, look at the shape of the repo. Scan the git log (ignore routine auto-save commits) for a theme worked hard across recent sessions worth promoting to a permanent home, or a file untouched for many sessions worth retiring. Name one, or say plainly there's nothing this time.
+
+Then close and prove it landed — this is the last step, in this order. Run ..cs to fossilise and commit. THEN open the committed files and confirm every change from every pass above — including the close's own commit — is actually present, and git status is clean; fix and re-commit anything that didn't land. If the commit can't complete in this environment, say so plainly and name exactly what's left uncommitted. If this repo runs a generated STATE.md or a capped TASKS/PRIORITY/, check they're within limits and drain any overflow. A claim is not done until the file shows it. State the safe-to-close verdict, verified by command not memory — working tree clean, no stashes, and whether local main is ahead of origin. Separate committed-and-pushed from committed-local-only (kept on a normal close; lost only if this machine is wiped before a push) from anything uncommitted. Do not push if this repo gates pushes or deploys behind a human — report the unpushed state and let the human decide (offer a non-deploying backup branch if useful). Then name anything that lived only in this conversation and was deliberately not written to a file; offer to persist it in one line or let the human release it — what isn't in a file won't survive the close.
+```
+
+**Short version** (native Text Replacement — keeps the spine, trades away durability nuances):
+
+```
+you're the steward of this repo's memory, closing a session that did real work, so make it compound into the files, not pile up beside them. read before you write: open the file a thing belongs in, and when an entry already covers the ground, sharpen it instead of adding a near-duplicate. everything lives in a repo file the next session loads, never in tool or agent memory. a claim isn't true until the file shows it. any pass can come up empty, so say so plainly, and never manufacture an entry to fill a section. work in order. first, take each learning and find where it already lives (principles, constraints, decisions, or a learnings file), read what's there, merge it in, then correct any earlier claim this session made false, leaving append-only logs alone. next, list what the session got wrong or redid, and for each either tighten an existing rule or write the fence that stops it recurring, preventing at the input what you'd keep catching at the output. next, check each closed task against its full acceptance criteria, capturing any shortfall as a narrower task before removing the original, and file handoffs where the right party finds them: work a human must action in the TASKS folder, finished work in its DONE subfolder. next, scan the git log (ignoring auto-save commits) for a theme worth promoting or a file worth retiring. name one or say there's nothing. finally, run ..cs to commit, reopen the committed files to confirm every change landed and re-commit anything that didn't, and drain any overflow if a generated STATE.md or capped PRIORITY folder runs over. then state the safe-to-close verdict by command not memory: working tree clean, no stashes, and committed-and-pushed vs committed-but-local-only vs uncommitted.
+```
 
 ## File Structure
 
@@ -153,23 +177,17 @@ Each file solves a specific forgetting problem. Together, they give AI persisten
 
 ### The Token Trade
 
-These files cost tokens. How much depends on your scope — `..architect` loads everything, `..builder` loads lean. But without them, you spend 30%+ re-explaining what you already know. You're trading a small, controllable slice of context for a reliable memory. After two or three sessions, you're way ahead. The lever: more context = more accurate but higher cost. Scope modifiers let you control this tradeoff.
+These files cost tokens. Without them, you spend 30%+ re-explaining what you already know. You're trading a small, controllable slice of context for a reliable memory. After two or three sessions, you're way ahead.
 
-### Why separate Architect and Builder?
+### The Architect and Builder metaphor
 
-Architect and Builder are **scopes** that control how much context loads:
-
-- **Architect** loads everything (PRFAQ, DECISIONS, CONSTRAINTS, etc.) for when you need the big picture
-- **Builder** loads lean (CLAUDE.md + TODO.md) for focused execution
-
-Architect can do everything Builder does — Builder is just cheaper and faster. You control the tradeoff between context cost and focus.
+**Architect** designs the thing, gets sign-off, and records the decisions. **Builder** executes. Claude Code's native plan mode handles the architect role: design, present a plan, get approval, then build. The protocol's job is to ensure the approved plan persists — acceptance criteria to `TODO.md`, architectural decisions to `DECISIONS.md` — so the builder phase has a real contract to work from.
 
 ### Why so many markdown files?
 
 - Small, focused files cost fewer tokens than one giant file
-- Different scopes load different files — Builder skips PRFAQ, Architect skips implementation detail
 - Version-controlled — roll back bad decisions like you would code
-- The token trade stays efficient because you only load what you need
+- Each file answers a specific question; together they give AI persistent memory of your project
 
 ### Why the onboarding flow?
 
@@ -187,10 +205,6 @@ Architect can do everything Builder does — Builder is just cheaper and faster.
 **Claude is ignoring my documentation files**
 - Use `..start` command to reload context
 - Check file sizes — if over 50KB, run `..hygiene`
-
-**Not sure which scope?**
-- Start with `..architect` for planning — it loads the full picture
-- Use `..builder` when you're heads-down on a specific task and don't need the big picture
 
 **Something went wrong and I want to undo**
 - Find your last good commit: `git log --oneline`
@@ -246,6 +260,12 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
 
 ## Changelog
 
+- **v1.3.1** (May 31, 2026): Plan Persistence + Deep Close
+  - Architect/Builder scope commands retired — Claude Code's native plan mode handles the plan→build handoff natively. The protocol's job is now to persist the approved plan: acceptance criteria → `TODO.md`, architectural decisions → `DECISIONS.md`.
+  - New command: `..wrap` — periodic deep close that compounds learnings, fences failures, reconciles tasks, and verifies the repo before ending with `..cs`
+  - `..wrap` ships as two artifacts: full v2.1 (for keyboard expanders or paste-at-session-end) and a short ASCII spine variant (for native Text Replacement)
+  - Removed `lean_mode` setting and scope machinery (replaced by the tier-based context loading model)
+
 - **v1.3** (May 18, 2026): Structural Discipline
   - Theme: locus of discipline moves from rules+hook-enforcement → structure that makes failure modes hard to occur
   - New Hard Rule #6: Case-study gate at rule-creation (every new rule cites a case study AND a level designation)
@@ -286,12 +306,12 @@ Protocol maintenance documentation (audits, version bumps, syncing downstream re
   - Downstream versioning convention: v{canonical}{letter} (e.g., v1.1a)
 
 - **v1.0** (Jan 25, 2026): Official release of protocol-duo
-  - Architect/Builder scope separation
-  - Commands: `..start`, `..architect`, `..builder`, `..make`, `..hygiene`, `..recover`
+  - Architect/Builder conceptual model for plan→build workflow
+  - Commands: `..start`, `..make`, `..hygiene`, `..recover`
   - File patterns: PRFAQ.md, DECISIONS.md, TODO.md, PROGRESS.md, CONSTRAINTS.md
   - Task ownership: TODO.md (AI work), TASKS/ folder (human work)
   - Trust & Integrity principles
 
 ---
 
-*duo Protocol v1.3 — May 18, 2026*
+*duo Protocol v1.3.1 — May 31, 2026*

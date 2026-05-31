@@ -1,4 +1,4 @@
-# duo AI Workflow Protocol (v1.3)
+# duo AI Workflow Protocol (v1.3.1)
 
 ## Atomic Interaction Contract
 
@@ -12,14 +12,7 @@ Every interaction follows this cycle automatically:
 | **RECORD** | Update .md files, commit immediately |
 | **REFLECT** | Surface improvements, flag drift |
 
-**Default scope:** Lean (CLAUDE.md + TODO.md + TASKS/)
-
-Scope modifiers expand or constrain what gets loaded:
-
-| Modifier | Scope | When to Use |
-|----------|-------|-------------|
-| `..architect` | Full | Planning, architecture decisions, validating "what good looks like" |
-| `..builder` | Lean | Implementation, execution, trusting the instruction |
+**Default scope:** Full (all .md files + recent git history)
 
 **Fossilization is automatic.** The RECORD step commits after every interaction. No `..end` or `..exit` ceremony required.
 
@@ -40,31 +33,14 @@ Each repo's learnings strengthen the collective. See [KayGee Protocol Family](ht
 
 ---
 
-## Lean Mode
-
-**Check CLAUDE.md for `lean_mode` setting before enforcing scope permissions.**
-
-| Mode | Behavior |
-|------|----------|
-| `lean_mode: on` | **Strict scope enforcement.** Must explicitly run `..architect` or `..builder` before using scope-specific commands. Loads essentials only by default. |
-| `lean_mode: off` | **Free flow.** Commands work without explicit scope switching. Claude loads context as needed. |
-
-**How it works:**
-- When `lean_mode: on` — Scope checks in `..gm`, `..make` are **enforced**. Claude stops and asks user to set scope.
-- When `lean_mode: off` — Scope checks are **advisory**. Claude notes the intended scope but proceeds with the command.
-
-**Default:** `off` (set in CLAUDE.md). Change to `on` for large projects where faster boot matters.
-
----
-
 ## Workflow Summary
 
 | Workflow | Sequence |
 |----------|----------|
-| **Design** | `..architect` → `..gm` → `..make` → (atomic RECORD commits) |
-| **Build** | `..builder` → (atomic cycle runs) |
-| **Maintenance** | `..architect` → `..hygiene` → (atomic RECORD commits) |
-| **Recovery** | `..recover` (Any scope) |
+| **Design** | `..gm` → `..make` → (atomic RECORD commits) |
+| **Build** | (atomic cycle runs) |
+| **Maintenance** | `..hygiene` → (atomic RECORD commits) |
+| **Recovery** | `..recover` |
 
 ---
 
@@ -168,7 +144,7 @@ Blocks: VideoWalkthrough.tsx implementation
 
 1. Add outcome to task file (decision, URL, confirmation number)
 2. Move to `TASKS/DONE/` or tell Claude in next session
-3. Claude checks TASKS/ on next `..gm` or `..builder`
+3. Claude checks TASKS/ on next `..gm`
 4. Claude unblocks dependent work and logs in PROGRESS.md
 
 **Example outcome added to task file:**
@@ -184,27 +160,6 @@ Blocks: VideoWalkthrough.tsx implementation
 
 ---
 
-## Scope Definitions
-
-### ..architect
-
-**Scope Expansion:**
-1. **Purpose:** System design, strategy, planning, validating "what good looks like"
-2. **Context Scope:** FULL (PRFAQ, CONSTRAINTS, DECISIONS, CLAUDE, TODO, PROGRESS, TASKS/)
-3. **Allowed Commands:** `..gm`, `..make`, `..hygiene`
-4. **Behavior:** Challenge drift, validate architecture, ask clarifying questions
-5. **Acknowledge:** "🏗️ ARCHITECT SCOPE. Full context loaded. (~15% token budget)"
-
-### ..builder
-
-**Scope Confirmation:**
-1. **Purpose:** Implementation & execution, trust the instruction
-2. **Context Scope:** LEAN (CLAUDE, TODO, TASKS/ only). Skip PRFAQ, CONSTRAINTS, PROGRESS.
-3. **Safety Check:** Run `git status`. If dirty: STOP. "⚠️ Uncommitted changes detected. Commit or stash first."
-4. **Allowed Commands:** `..recover`
-5. **Behavior:** Execute efficiently, don't re-plan, micro-commit after each unit
-6. **Acknowledge:** "🔨 BUILDER SCOPE. Lean context loaded. (~5% token budget)"
-
 ---
 
 ## Operational Commands
@@ -215,18 +170,13 @@ Blocks: VideoWalkthrough.tsx implementation
 
 **Note:** The SessionStart hook already loads all context automatically. `..gm` adds the human-facing briefing on top — priorities, risks, what needs attention.
 
-**Step 1: Scope Verification**
-- Check `lean_mode` in CLAUDE.md
-- IF `lean_mode: on` AND Scope != FULL: **Stop.** Reply: "⛔ **Builder Optimization:** Builders should skip `..gm` — the atomic cycle runs automatically in lean scope."
-- IF `lean_mode: off`: Proceed
-
-**Step 2: Status Report**
+**Step 1: Status Report**
 - Report top priority task from TODO.md (including acceptance criteria).
 - Note any completed tasks in TASKS/DONE/ that unblock work.
 - Flag stale human tasks in TASKS/ (>7 days no progress).
 - Wait for `..make` or `..hygiene`.
 
-**Step 3: Task Analysis**
+**Step 2: Task Analysis**
 - Identify human tasks in TASKS/ where Claude could prepare something (draft, research, spec)
 - Suggest task splits if a human task has Claude-doable subcomponents
 
@@ -236,16 +186,11 @@ Blocks: VideoWalkthrough.tsx implementation
 
 **Design Protocol (Full Scope)**
 
-**Step 1: Scope Check**
-- Check `lean_mode` in CLAUDE.md
-- IF `lean_mode: on` AND Scope != FULL: **Stop.** Reply: "⛔ Permission Denied. Run `..architect` first."
-- IF `lean_mode: off`: Proceed (implicitly loads full context for this command)
-
-**Step 2: Intent Confirmation**
+**Step 1: Intent Confirmation**
 - User provides 1-2 sentence feature goal.
 - Confirm understanding before proceeding.
 
-**Step 3: Design Phase (MANDATORY VISUAL)**
+**Step 2: Design Phase (MANDATORY VISUAL)**
 - **CRITICAL:** Present a **Design Proposal** (ASCII mockup or detailed description) and ask for user confirmation BEFORE writing to DECISIONS.md or TODO.md.
 - Review CONSTRAINTS.md for rejected approaches.
 - Review DECISIONS.md for existing patterns.
@@ -270,14 +215,14 @@ Questions:
 Approve this design before I write to DECISIONS.md?
 ```
 
-**Step 4: Task Routing**
+**Step 3: Task Routing**
 - For each task, determine location:
   - Claude can complete entirely? → **TODO.md**
   - Requires human action? → **TASKS/** (create task file)
   - Claude prepares, human executes? → Claude does the work in TODO.md, then creates task file in TASKS/PRIORITY/ with deliverable
   - Human decides, Claude implements? → Create decision task in TASKS/PRIORITY/, add dependent TODO.md item
 
-**Step 5: Output Protocol (MANDATORY)**
+**Step 4: Output Protocol (MANDATORY)**
 - **Write directly to files:**
   - DECISIONS.md: Add/update ADR
   - TODO.md: Add AI tasks with AC
@@ -299,11 +244,11 @@ Approve this design before I write to DECISIONS.md?
 
 ### Builder Execution (Atomic Cycle)
 
-When `..builder` is active, the atomic cycle handles implementation automatically:
+The atomic cycle handles implementation automatically:
 
 **LOAD Phase:**
 - Check `TASKS/DONE/` for completed human tasks that unblock work
-- Run `git status` and `git pull` — if dirty or changes found, STOP and re-run `..builder`
+- Run `git status` and `git pull` — if dirty or changes found, STOP and commit or stash before proceeding
 - Read TODO.md — all items are AI work by definition
 - Select top priority task
 
@@ -412,6 +357,84 @@ Next session: run `..gm` to pick up where we left off."
 
 ---
 
+### Plan Mode — Persistence Rule
+
+When using Claude Code's native plan mode, persist the approved plan before ending the session:
+- Acceptance criteria → `TODO.md`
+- Architectural decisions → `DECISIONS.md`
+
+A plan that lives only in the conversation violates Hard Rule #1 (files are memory).
+
+**Case study:** Observed in production — plan mode output evaporates between sessions when not persisted at plan-exit time. **Level: flavour-level (duo Construct).**
+
+---
+
+### `..wrap` (Periodic Deep Close)
+
+**When to use:** After a substantial session — one that introduced decisions, corrected earlier claims, or meaningfully changed the repo's shape. Less frequent than `..cs`; use when the session warrants a full audit. Ends by calling `..cs`.
+
+> You are the steward of this repo's memory, closing out a session that did real
+> work. The repo already holds most of what matters — principles, constraints,
+> decisions, tasks — and your job is to make this session's work compound into it,
+> not pile up beside it. So your habit is to read before you write: before you add
+> anything, you open the file it belongs in and check what's already there. The
+> thing you are fighting is the near-duplicate — a fresh entry that says almost what
+> an existing one already says. When you find the entry that covers the ground, you
+> sharpen it instead of adding a rival. Everything you record lives in a repo file
+> the next session will load — never in tool or agent memory, which doesn't travel
+> in git. And you don't trust a claim until the file shows it: the files are the
+> memory; if a change isn't in them, it didn't happen. Any pass below can come up
+> empty — say so plainly and move on; never manufacture an entry to fill a section.
+>
+> Work through the session in this order.
+>
+> Start with what you learned. Take each learning and go find where it already
+> lives — the principles home (PRINCIPLES.md, or the Principles section of
+> CLAUDE.md), the constraints home (CONSTRAINTS.md, or the Constraints section of
+> CLAUDE.md), the decisions log (DECISIONS.md, if this repo keeps one), or wherever
+> this repo keeps such notes (e.g. a LEARNINGS file). Read what is already there
+> before you touch it. If an entry covers the ground, merge your learning in and
+> leave it sharper. Write a new entry only once you've looked and nothing fits.
+> While you're in each home, check whether a decision this session made has left an
+> earlier claim now false — if so, correct that claim in every current-state place
+> it appears (leave append-only logs alone). Note where each change went.
+>
+> Next, account for what went wrong. List what the session got wrong, redid, or
+> corrected. For each, check whether an existing rule or constraint already speaks
+> to it — if so, tighten that one; if not, write the fence that stops it recurring,
+> into a repo file. Prevent at the input what you'd otherwise keep catching at the
+> output. A failure you can't fence is the most important thing to surface.
+>
+> Next, reconcile the work. Check each task you closed against its full acceptance
+> criteria; if anything shipped short, capture the remainder as a narrower task
+> before removing the original. Write down any open item that won't resurface on its
+> own next session. File handoffs where the right party will find them — work a
+> human must action in TASKS/, finished human work in TASKS/DONE/.
+>
+> Next, look at the shape of the repo. Scan the git log (ignore routine auto-save
+> commits) for a theme worked hard across recent sessions worth promoting to a
+> permanent home, or a file untouched for many sessions worth retiring. Name one,
+> or say plainly there's nothing this time.
+>
+> Then close and prove it landed — this is the last step, in this order. Run `..cs`
+> to fossilise and commit. THEN open the committed files and confirm every change
+> from every pass above — including the close's own commit — is actually present,
+> and `git status` is clean; fix and re-commit anything that didn't land. If the
+> commit can't complete in this environment, say so plainly and name exactly what's
+> left uncommitted. If this repo runs a generated STATE.md or a capped
+> TASKS/PRIORITY/, check they're within limits and drain any overflow. A claim is
+> not done until the file shows it. State the safe-to-close verdict, verified by
+> command not memory — working tree clean, no stashes, and whether local `main` is
+> ahead of `origin`. Separate committed-and-pushed from committed-local-only (kept
+> on a normal close; lost only if this machine is wiped before a push) from anything
+> uncommitted. Do not push if this repo gates pushes or deploys behind a human —
+> report the unpushed state and let the human decide (offer a non-deploying backup
+> branch if useful). Then name anything that lived only in this conversation and was
+> deliberately not written to a file; offer to persist it in one line or let the
+> human release it — what isn't in a file won't survive the close.
+
+---
+
 ### ..hygiene
 
 **Context Garbage Collection (Full Scope)**
@@ -426,10 +449,6 @@ Evaluate health:
 - ✅ **Good:** Total <10,000 words, no single file >3,000 words
 - ⚠️ **Warning:** Total 10,000-15,000 words, or any file >3,000 words
 - 🚨 **Critical:** Total >15,000 words, or any file >5,000 words
-
-**Target token loads per scope:**
-- Architect: ~7,500 tokens (~15% budget) — PRFAQ, CONSTRAINTS, DECISIONS, CLAUDE, TODO, PROGRESS, TASKS/
-- Builder: ~2,500 tokens (~5% budget) — CLAUDE, TODO, TASKS/
 
 **Flag if:** PRINCIPLES.md missing after project has >5 ADRs
 
@@ -465,9 +484,8 @@ If DECISIONS.md has >5 implemented ADRs and no PRINCIPLES.md exists:
 ```
 "🗑️ Hygiene Complete
 
-Token Budget:
-- Architect: [X] words (~Y% of budget) [✅/⚠️/🚨]
-- Builder: [X] words (~Y% of budget) [✅/⚠️/🚨]
+Documentation size:
+- Total: [X] words [✅/⚠️/🚨]
 
 Actions:
 - Archived [X] sessions to _archive/PROGRESS_[YYYY-MM].md
@@ -487,8 +505,8 @@ Health: [Good/Warning/Critical]"
 **When to Run:**
 - **Proactive:** Monthly check (first Monday)
 - **Reactive:** After v0.5, v1.0, v2.0 milestones
-- **Emergency:** When Architect feels sluggish loading context
-- **Critical:** When token budget check shows 🚨 Critical
+- **Emergency:** When context loading feels sluggish
+- **Critical:** When file size check shows 🚨 Critical
 
 ---
 
@@ -518,7 +536,7 @@ Then re-run init migration.
 
 **After Recovery:**
 - Update PROGRESS.md with recovery note.
-- Reply: "🔧 Recovery complete. Run `..builder` to resume."
+- Reply: "🔧 Recovery complete. Resume work in a new session."
 
 ---
 
@@ -651,16 +669,6 @@ If Claude Code crashes mid-implementation and there's uncommitted work:
 5. **Document**: Add recovery note to PROGRESS.md
 
 This is a last resort. The Save Game Rule prevents needing it.
-
----
-
-## Context Loading Reference
-
-| Scope | Files Loaded | Approx Size | Token Budget |
-|-------|--------------|-------------|--------------|
-| Full (`..architect`) | PRFAQ, CONSTRAINTS, DECISIONS, CLAUDE, TODO, PROGRESS, TASKS/ | ~30KB | ~15% |
-| Lean (`..builder`) | CLAUDE, TODO, TASKS/ | ~12KB | ~5% |
-| Default (no modifier) | CLAUDE, TODO, TASKS/ | ~12KB | ~5% |
 
 ---
 
